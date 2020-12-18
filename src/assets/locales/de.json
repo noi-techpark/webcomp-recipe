@@ -1,0 +1,70 @@
+{
+    "altitude": "Höhe",
+    "difficulty": "Schwierigkeit",
+    "location": "Ort",
+    "phone": "Telefon",
+    "web": "Web",
+    "categories": "Kategorien",
+    "ceremonies": "Veranstaltungen",
+    "dishRates": "Speisen",
+    "operationSchedule": "Öffnungszeiten",
+    "lastChange": "Letzte Aktualisierung",
+    "gastronomyTypes": {
+        "DishCodes": "Speisen",
+        "CuisineCodes": "Küche",
+        "FacilityCodes_CreditCard": "Zahlungsmittel",
+        "FacilityCodes_Equipment": "Ausstattung",
+        "FacilityCodes_QualitySeals": "Qualitätssiegel"
+    },
+    "scheduleTypes": {
+        "1": "Geöffnet",
+        "2": "Geschlossen"
+    },
+    "timeCodes": {
+        "1": "Allgemeine Öffnungszeiten",
+        "2": "Warme Mahlzeiten",
+        "3": "Pizza",
+        "4": "Snacks"
+    },
+    "scheduleDays": {
+        "Monday": "Mo",
+        "Tuesday": "Di",
+        "Wednesday": "Mi",
+        "Thuresday": "Do",
+        "Friday": "Fr",
+        "Saturday": "Sa",
+        "Sunday": "So"
+    },
+    "mainType": "Hauptkategorie",
+    "subType": "Unterkategorie",
+    "altitudeDifference": "Höhenunterschied",
+    "altitudeHighestPoint": "Höchster Punkt",
+    "altitudeLowestPoint": "Niedrigster Punkt",
+    "Gastronomy": "Gastronomie",
+    "Activity": "Aktivitäten",
+    "POI": "Sehenswürdigkeiten",
+    "props": {
+        "AltitudeDifference": "Höhendifferenz",
+        "AltitudeLowestPoint": "Tiefster Punkt",
+        "AltitudeHighestPoint": "Höchster Punkt",
+        "AltitudeSumUp": "Höhenmeter aufwärts",
+        "AltitudeSumDown": "Höhenmeter abwärts",
+        "DistanceLength": "Länge",
+        "DistanceDuration": "Dauer",
+        "BikeTransport": "Fahrradtransport",
+        "HasFreeEntrance": "Freier Eintritt",
+        "LiftAvailable": "Lift verfügbar",
+        "RunToValley": "####",
+        "IsWithLight": "Beleuchted",
+        "HasRentals": "Verleih verfügbar",
+        "IsPrepared": "Prepartiert",
+        "FeetClimb": "Begehbar",
+        "IsOpen": "Geöffnet"
+    },
+    "yes": "Ja",
+    "paging": {
+        "next": "weiter",
+        "back": "zurück"
+    },
+    "noResults": "Keine Ergebnisse gefunden"
+}

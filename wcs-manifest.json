@@ -1,15 +1,21 @@
 {
-  "title": "Webcomponent Boilerplate",
-  "description": "A webcomponent boilerplate that can be used to build your own boilerplate.",
-  "descriptionAbstract": "A webcomponent boilerplate",
+  "title": "Tourism Detail",
+  "description": "",
+  "descriptionAbstract": "",
   "license": "AGPL-3.0",
-  "repositoryUrl": "https://github.com/noi-techpark/webcomp-boilerplate",
+  "repositoryUrl": "https://github.com/noi-techpark/webcomp-tourism-detail",
   "authors": [
     {
       "name": "NOI",
       "email": "info@noi.bz.it",
       "organization": "NOI S.p.A",
       "organizationUrl": "https://noi.bz.it"
+    },
+    {
+      "name": "KONVERTO",
+      "email": "info@konverto.eu",
+      "organization": "KONVERTO AG",
+      "organizationUrl": "https://konverto.eu"
     }
   ],
   "image": null,
@@ -17,11 +23,11 @@
   "dist": {
     "basePath": "dist",
     "files": [
-      "app.min.js"
+      "webcomp-tourism-detail.min.js"
     ]
   },
   "configuration": {
-    "tagName": "webcomponent-boilerplate",
+    "tagName": "webcomp-tourism-detail",
     "options": []
   }
 }

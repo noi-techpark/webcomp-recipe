@@ -1,12 +1,4 @@
-Replace all `ToDo` notes in this file and adjust also the following files:
-- package.json:
-    - Adjust the general parts like name, description, ...
-    - Adjust the three scripts `npm run start`, `npm run build` and `npm run test`
-- wcs-manifest.json:
-    - Adjust the general parts like title, description, ...
-    - Adjust the configuration part with all possible configuration options (https://webcomponents.opendatahub.bz.it/getting-started)
-
-# ToDo: Project Name
+# Tourism Details Web Component
 
 ToDo: Description of the project.
 
@@ -21,26 +13,50 @@ ToDo: Description of the project.
 
 ## Usage
 
-ToDo: Include the webcompscript file `dist/webcomp-boilerplate.min.js` in your HTML and define the web component like this:
-
 ```html
-<webcomp-boilerplate xxx="test" yyy="2"></webcomp-boilerplate>
+<script src="https://unpkg.com/vue"></script>
+<script src="./webcomp-tourism-detail.min.js"></script>
+
+<webcomp-tourism-detail></webcomp-tourism-detail>
 ```
 
 ### Attributes
 
-#### xxxx
+#### contentType
 
-The description of the parameter xxx.
+Content type of the webcomponent data
 
-Type: string
-Options: "test", "123"
+Type: string\
+Options: ["Gastronomy", "Activity", "POI"]
 
-#### yyy
+#### contentIdList
 
-The description of the parameter yyy.
+List of content Ids separated by a comma. Example: "1,2,3" 
 
-Type: int
+Type: String
+
+#### category
+
+Single category code to filter the list
+
+Type: String\
+Options:\
+    - Gastronomy: BITMASK values: 1 = (Restaurant), 2 = (Bar / Café / Bistro), 4 = (Pub / Disco), 8 = (Apres Ski), 16 = (Jausenstation), 32 = (Pizzeria), 64 = (Bäuerlicher Schankbetrieb), 128 = (Buschenschank), 256 = (Hofschank), 512 = (Törggele Lokale), 1024 = (Schnellimbiss), 2048 = (Mensa), 4096 = (Vinothek /Weinhaus / Taverne), 8192 = (Eisdiele), 16348 = (Gasthaus), 32768 = (Gasthof), 65536 = (Braugarten), 131072 = (Schutzhütte), 262144 = (Alm), 524288 = (Skihütte)\
+    - Activity: 'null' = Filter disabled, possible values: BITMASK: 'Mountains = 1','Cycling = 2','Local tours = 4','Horses = 8','Hiking = 16','Running and fitness = 32','Cross-country ski-track = 64','Tobbogan run = 128','Slopes = 256','Lifts = 512'\
+    - POI: 'null' = Filter disabled, possible values: BITMASK 'Doctors, Pharmacies = 1','Shops = 2','Culture and sights= 4','Nightlife and entertainment = 8','Public institutions = 16','Sports and leisure = 32','Traffic and transport = 64', 'Service providers' = 128, 'Craft' = 256
+
+#### langugage
+
+Language of the data 
+
+Type: string\
+Options: ["de", "en", "it"]
+
+#### pageSize
+
+Number of items that are shown in one page
+
+Type: Number
 
 ## Getting started
 
@@ -56,7 +72,7 @@ To build the project, the following prerequisites must be met:
 
 For a ready to use Docker environment with all prerequisites already installed and prepared, you can check out the [Docker environment](#docker-environment) section.
 
-### Source code
+`### Source code`
 
 Get a copy of the repository:
 
@@ -155,7 +171,7 @@ docker-compose run --rm app /bin/bash -c "npm run test"
 
 ### Support
 
-ToDo: For support, please contact [info@opendatahub.bz.it](mailto:info@opendatahub.bz.it).
+For support, please contact [info@opendatahub.bz.it](mailto:info@opendatahub.bz.it).
 
 ### Contributing
 
