@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <h2 class="page-title">{{ $t(contentType) }}</h2>
+    <h2 class="page-title">{{ $t('recipes') }}</h2>
     <paging
         :current-page="currentPage"
         :total-pages="totalPages"
@@ -15,9 +15,7 @@
           <div v-else><img class="thumbnail" :src="item.ImageGallery[0].ImageUrl"/></div>
           <div class="info">
             <div class="title">{{ getTitle(item, language) }}</div>
-            <div v-if="contentType === 'Gastronomy'" class="short-info">{{ getGastronomyShortInfo(item) }}</div>
-            <div v-else-if="contentType === 'Activity'" class="short-info">{{ getActivityShortInfo(item) }}</div>
-            <div v-else-if="contentType === 'POI'" class="short-info">{{ getPoiShortInfo(item) }}</div>
+            <div class="short-info">{{ getGastronomyShortInfo(item) }}</div>
           </div>
           <img src="@/assets/img/arrow_right.svg" width="28" height="28"/>
         </div>
@@ -39,7 +37,7 @@
 </template>
 
 <script>
-import {ActivityApi, GastronomyApi, PoiApi} from "@/api";
+import {ActivityApi, ArticleApi, GastronomyApi, PoiApi} from "@/api";
 import Paging from "@/components/Paging";
 
 export default {
@@ -48,10 +46,6 @@ export default {
     language: {
       type: String,
       default: 'en'
-    },
-    contentType: {
-      type: String,
-      default: 'Gastronomy'
     },
     contentIdList: {
       type: String,
@@ -77,112 +71,50 @@ export default {
     };
   },
   created() {
-    if(this.contentType === 'Gastronomy') {
-      this.loadGastronomyTypeList()
-      this.loadGastronomyList(1)
-    } else if(this.contentType === 'Activity') {
-      this.loadActivityTypeList()
-      this.loadActivityList(1)
-    } else if(this.contentType === 'POI') {
-      this.loadPoiList(1)
-    }
+    this.loadRecipeList(1)
   },
   methods: {
     nextPage() {
       this.items = []
-      if(this.contentType === 'Gastronomy') {
-        this.loadGastronomyList(this.currentPage + 1)
-      } else if(this.contentType === 'Activity') {
-        this.loadActivityList(this.currentPage + 1)
-      } else {
-        this.loadPoiList(this.currentPage + 1)
-      }
+      this.loadRecipeList(this.currentPage + 1)
       this.currentPage = this.currentPage + 1
     },
     lastPage() {
       this.items = []
-      if(this.contentType === 'Gastronomy') {
-        this.loadGastronomyList(this.currentPage - 1)
-      } else if(this.contentType === 'Activity') {
-        this.loadActivityList(this.currentPage - 1)
-      } else {
-        this.loadPoiList(this.currentPage - 1)
-      }
+      this.loadRecipeList(this.currentPage - 1)
       this.currentPage = this.currentPage - 1
     },
     goToPage(pageNum) {
       this.items = []
-      if(this.contentType === 'Gastronomy') {
-        this.loadGastronomyList(pageNum)
-      } else if(this.contentType === 'Activity') {
-        this.loadActivityList(pageNum)
-      } else {
-        this.loadPoiList(pageNum)
-      }
+      this.loadRecipeList(pageNum)
       this.currentPage = pageNum
     },
     showDetail(contentId) {
       this.$emit('show-detail', contentId);
     },
-    loadActivityTypeList() {
-      const activityApi = new ActivityApi()
-      activityApi.activityGetAllActivityTypesList().then((value) => {
-        this.activityTypes = value.data
-        console.log(value)
-      })
-    },
-    loadActivityList(pageNum) {
+    loadRecipeList(pageNum) {
       this.isLoading = true;
-      const activityApi = new ActivityApi()
-      activityApi.activityGetActivityList(null, pageNum, this.pageSize, this.category, null,
-          this.contentIdList,null,null,null,null,null,null,
-          null,null,true,true,null,null,null,null,
-          null,null,null,[]).then((value => {
+      const articleApi = new ArticleApi()
+      articleApi.articleGetArticleList(pageNum, this.pageSize, 32, null, null,
+          this.contentIdList,null,null,null,true,null,null,
+          this.language,null,null,[]).then((value => {
         this.items = value?.data?.Items ?? []
+        if(this.items != null) {
+          this.items = this.items.filter((item) => item?.Detail?.[this.language] != null && +
+              item?.Detail?.[this.language]?.Title != null && item?.Detail?.[this.language]?.Title !== "")
+        }
         this.currentPage = value?.data?.CurrentPage
         this.totalPages = value?.data?.TotalPages
         console.log(value)
         this.isLoading = false;
       }))
     },
-    loadGastronomyTypeList() {
-      const gastronomyApi = new GastronomyApi()
-      gastronomyApi.gastronomyGetAllGastronomyTypesList().then((value) => {
-        this.gastronomyTypes = value.data
-        console.log(value)
-      })
-    },
-    loadGastronomyList(pageNum) {
-      this.isLoading = true;
-      const gastronomyApi = new GastronomyApi()
-      gastronomyApi.gastronomyGetGastronomyList(
-          pageNum, this.pageSize, this.contentIdList, null, null, null, this.category,
-          null, null, null, true, true, null, null,
-          null, null, null, null, null, null
-      ).then((value => {
-        this.items = value?.data?.Items ?? []
-        this.currentPage = value?.data?.CurrentPage
-        this.totalPages = value?.data?.TotalPages
-        console.log(value)
-        this.isLoading = false;
-      }))
-    },
-    loadPoiList(pageNum) {
-      this.isLoading = true;
-      const poiApi = new PoiApi()
-      poiApi.poiGetPoiFiltered(pageNum, this.pageSize, this.category, null, this.contentIdList, null, null,
-      null, null, true, true, null, null, null, null, null,
-      null, null, null, []
-      ).then((value => {
-        this.items = value?.data?.Items ?? []
-        this.currentPage = value?.data?.CurrentPage
-        this.totalPages = value?.data?.TotalPages
-        console.log(value)
-        this.isLoading = false;
-      }))
+    getTitle(item, language) {
+      return item?.Detail?.[language]?.Title ?? ''
     },
     getGastronomyShortInfo(item) {
-      const shortInfo = []
+      return ''
+      /*const shortInfo = []
       shortInfo.push(...this.getGastronomyTypes(item))
       if(item?.ContactInfos?.[this.language]?.City) {
         const location = this.$t('location') + ': ' + (item.ContactInfos?.[this.language].City)
@@ -196,91 +128,8 @@ export default {
         const url = this.$t('web') + ': ' + (item.ContactInfos.en.Url)
         shortInfo.push(url)
       }
-      return shortInfo.filter((info) => info != null).join(', ')
+      return shortInfo.filter((info) => info != null).join(', ')*/
     },
-    getGastronomyTypes(item) {
-      const categoryCodeIds = item.CategoryCodes.map((code) =>
-          this.gastronomyTypes.find(x => x.Id === code.Id)
-      )
-      const categories = categoryCodeIds.map((category) => {
-        if(this.language === 'de') {
-          return category?.TypeDesc?.de ?? '-'
-        } else if(this.language === 'it') {
-          return category?.TypeDesc?.it ?? '-'
-        } else {
-          return category?.TypeDesc?.en ?? '-'
-        }
-      })
-      return categories
-    },
-    getActivityShortInfo(item) {
-      const shortInfo = []
-      shortInfo.push(...this.getActivityTypes(item))
-      if(item?.ContactInfos?.[this.language]?.City) {
-        const location = this.$t('location') + ': ' + (item.ContactInfos?.[this.language].City)
-        shortInfo.push(location)
-      }
-      if(item?.ContactInfos?.en?.Phonenumber) {
-        const telephone = this.$t('phone') + ': ' + (item.ContactInfos.en.Phonenumber)
-        shortInfo.push(telephone)
-      }
-      if(item?.ContactInfos?.en?.Url){
-        const url = this.$t('web') + ': ' + (item.ContactInfos.en.Url)
-        shortInfo.push(url)
-      }
-      if(item?.Difficulty) {
-        const difficulty = 'Difficulty: ' + (item?.Difficulty)
-        shortInfo.push(difficulty)
-      }
-      return shortInfo.filter((info) => info != null).join(', ')
-    },
-    getActivityTypes(item) {
-      let categoryCodeIds = item.ActivityTypes.map((code) =>
-          this.activityTypes.find(x => x.Id === code.Id)
-      )
-      categoryCodeIds = categoryCodeIds.filter(function (el) {
-        return el != null;
-      })
-      const categories = categoryCodeIds.map((category) => {
-        if(this.language === 'de') {
-          return category?.TypeDesc?.de ?? '-'
-        } else if(this.language === 'it') {
-          return category?.TypeDesc?.it ?? '-'
-        } else {
-          return category?.TypeDesc?.en ?? '-'
-        }
-      })
-      return categories
-    },
-    getTitle(item, language) {
-      return item?.Detail?.[language]?.Title ?? ''
-    },
-    getPoiShortInfo(item) {
-      const shortInfo = []
-      shortInfo.push(...this.getPoiTypes(item))
-      if(item?.ContactInfos?.[this.language]?.City) {
-        shortInfo.push(this.$t('location') + ': ' + (item.ContactInfos?.[this.language].City))
-      }
-      if(item?.ContactInfos?.en?.Phonenumber) {
-        shortInfo.push(this.$t('phone') + ': ' + (item.ContactInfos.en.Phonenumber))
-      }
-      if(item?.ContactInfos?.en?.Url){
-        shortInfo.push(this.$t('web') + ': ' + (item.ContactInfos.en.Url))
-      }
-      return shortInfo.filter((info) => info != null).join(', ')
-    },
-    getPoiTypes(item) {
-      const poiType = item.AdditionalPoiInfos[this.language].MainType
-      const subType = item.AdditionalPoiInfos[this.language].SubType
-      const categories = []
-      if(poiType !== null) {
-        categories.push(poiType)
-      }
-      if(subType !== null) {
-        categories.push(subType)
-      }
-      return categories
-    }
   },
 };
 </script>
