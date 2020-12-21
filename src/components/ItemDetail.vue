@@ -1,22 +1,10 @@
 <template>
   <div>
-    <a v-if="isListAvailable" href @click.prevent="close">close</a><br />
-
+    <a v-if="isListAvailable" href @click.prevent="close">Zurück</a><br />
     <div v-if="item" class="item">
-      <div class="title">
-        <h2>{{ itemDetail.Title }}</h2>
-        <!-- Gastronomy -->
-        <div v-if="itemCategories" class="categories">
-          <div class="subtitle">{{ itemCategories }}</div>
-        </div>
-        <!-- POI / Activity -->
-        <div v-if="itemAdditionalPoiInfos">
-          <span v-if="itemAdditionalPoiInfos.MainType" class="subtitle">
-            {{ itemAdditionalPoiInfos.MainType }}
-          </span>
-          <span v-if="itemAdditionalPoiInfos.SubType" class="subtype">
-            {{ itemAdditionalPoiInfos.SubType }}
-          </span>
+      <div class="title-container" :style="titleImage">
+        <div class="title" >
+          <h2>{{ itemDetail.Title }}</h2>
         </div>
       </div>
 
@@ -41,7 +29,7 @@
           <li v-if="item.AltitudeHighestPoint">
             <img src="@/assets/img/ic_altitudehighestpoint.svg" />
             <span class="prop-key"
-              >{{ $t('props.AltitudeHighestPoint') }}: </span
+            >{{ $t('props.AltitudeHighestPoint') }}: </span
             >
             <span class="text-dark">{{ item.AltitudeHighestPoint }}{{ item.AltitudeUnitofMeasure }}</span>
           </li>
@@ -84,37 +72,12 @@
         </ul>
       </div>
 
-      <div v-if="itemDetail.BaseText" v-html="itemDetail.BaseText" class="text"></div>
-
-      <!-- COMMON -->
-      <div v-if="itemOperationSchedule.length">
-        <div class="subtitle">{{ $t('operationSchedule') }}</div>
-        <div>
-          <div v-for="(schedule, i) of itemOperationSchedule" :key="i">
-            <!-- Opened || Closed -->
-            <div v-if="schedule.Type === '1' || schedule.Type === '2'">
-              <b :style="[schedule.Type === '1' ? {'color': '#9BC320'} : {'color': 'red'}]">{{ $t(`scheduleTypes.${schedule.Type}`) }}</b>
-              <ul v-if="schedule.OperationScheduleTime">
-                <div v-for="(time, j) of schedule.OperationScheduleTime" :key="j" class="text">
-                  <span class="text-dark">{{ $t(`timeCodes.${time.Timecode}`) }}</span> von {{ time.Start }} bis
-                  {{ time.End }}
-                  ({{ getItemScheduleDays(time) }})
-                </div>
-              </ul>
-            </div>
-            <!-- Season -->
-            <div v-if="schedule.Type === '3'">
-              {{ schedule.Start | dateFormat }} bis
-              {{ schedule.Stop | dateFormat }}
-            </div>
-          </div>
-        </div>
-      </div>
+      <div v-if="itemDetail.BaseText" v-html="articleText" class="text"></div>
 
       <div v-if="Object.keys(itemProps).length" class="additional-props-box">
         <ul
-          class="props"
-          :class="{ single: Object.keys(itemProps).length === 1 }"
+            class="props"
+            :class="{ single: Object.keys(itemProps).length === 1 }"
         >
           <li v-for="(value, key) of itemProps" :key="key" class="text">
             <span class="prop-key">{{ $t(`props.${key}`) }}:</span>
@@ -151,19 +114,20 @@
 
       <div v-if="imageGallery">
         <img v-for="(image, i) of imageGallery" :key="i" :src="image.ImageUrl" height="250" width="250"
-        class="image" @click="openImageDetail(image)"/>
+             class="image" @click="openImageDetail(image)"/>
       </div>
 
       <small class="text">
         {{ $t('lastChange') }}: {{ item.LastChange | dateFormat }}
       </small>
     </div>
-    <image-detail :imgUrl="imageUrl" v-if="showImage" @close="closeImageDetail"></image-detail>
+    <image-detail :imgUrl="imageUrl" v-if="showImage"  :hasMultipleImgs="hasMultipleImgs" @close="closeImageDetail"
+                  @next-image="nextImage" @last-image="lastImage"></image-detail>
   </div>
 </template>
 
 <script>
-import { GastronomyApi, PoiApi, ActivityApi } from '@/api';
+import { GastronomyApi, PoiApi, ActivityApi, ArticleApi } from '@/api';
 import ImageDetail from "@/components/ImageDetail";
 
 const GASTRONOMY_TYPES = [
@@ -209,23 +173,43 @@ export default {
       item: null,
       gastronomyTypes: [],
       showImage: false,
-      imageUrl: null
+      imageUrl: null,
+      selectedImage: null
     };
   },
   computed: {
+    titleImage() {
+      const image = this.item?.ImageGallery[0]
+      if(image == null) {
+        return {};
+      } else {
+        return {
+          backgroundImage: 'url('+ image.ImageUrl + ') ',
+          height: '400px',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }
+      }
+    },
     imageGallery() {
       return this.item?.ImageGallery || []
     },
+    hasMultipleImgs() {
+      return this.imageGallery.length>1
+    },
     itemDetail() {
       return this.item?.Detail?.[this.language] || {};
+    },
+    articleText() {
+      return this.item?.AdditionalArticleInfos?.de?.Elements?.zubereitungstext || ''
     },
     itemContactInfos() {
       return this.item?.ContactInfos?.[this.language] || {};
     },
     googleMapsLink() {
       return this.item?.Latitude && this.item?.Longitude
-        ? `https://www.google.com/maps/search/?api=1&query=${this.item.Latitude},${this.item.Longitude}`
-        : null;
+          ? `https://www.google.com/maps/search/?api=1&query=${this.item.Latitude},${this.item.Longitude}`
+          : null;
     },
     itemAdditionalPoiInfos() {
       const infos = this.item?.AdditionalPoiInfos?.[this.language] || {};
@@ -261,45 +245,45 @@ export default {
     },
     itemCategories() {
       return (
-        this.item?.CategoryCodes?.map(
-          (c) =>
-            this.gastronomyTypes.find((t) => t.Id === c.Id)?.TypeDesc[
-              this.language
-            ]
-        ).join(', ') || ''
+          this.item?.CategoryCodes?.map(
+              (c) =>
+                  this.gastronomyTypes.find((t) => t.Id === c.Id)?.TypeDesc[
+                      this.language
+                      ]
+          ).join(', ') || ''
       );
     },
     itemCeremonies() {
       return (
-        this.item?.CapacityCeremony?.map((c) => ({
-          name: this.gastronomyTypes.find((t) => t.Id === c.Id)?.TypeDesc[
-            this.language
-          ],
-          maxSeatingCapacity: c.MaxSeatingCapacity,
-        })) || []
+          this.item?.CapacityCeremony?.map((c) => ({
+            name: this.gastronomyTypes.find((t) => t.Id === c.Id)?.TypeDesc[
+                this.language
+                ],
+            maxSeatingCapacity: c.MaxSeatingCapacity,
+          })) || []
       );
     },
     itemDishRates() {
       return (
-        this.item?.DishRates?.map((c) => ({
-          name: this.gastronomyTypes.find((t) => t.Id === c.Id)?.TypeDesc[
-            this.language
-          ],
-          maxAmount: c.MaxAmount,
-          minAmount: c.MinAmount,
-          currencyCode: c.CurrencyCode,
-        })) || []
+          this.item?.DishRates?.map((c) => ({
+            name: this.gastronomyTypes.find((t) => t.Id === c.Id)?.TypeDesc[
+                this.language
+                ],
+            maxAmount: c.MaxAmount,
+            minAmount: c.MinAmount,
+            currencyCode: c.CurrencyCode,
+          })) || []
       );
     },
     itemGastronomyTypes() {
       const filteredArray = this.gastronomyTypes.filter((t) =>
-        this.item.Facilities.find((f) => t.Id === f.Id)
+          this.item.Facilities.find((f) => t.Id === f.Id)
       );
       return GASTRONOMY_TYPES.map((type) => ({
         name: this.$t(`gastronomyTypes.${type}`),
         values: filteredArray
-          .filter((t) => t.Type === type)
-          .map((t) => t.TypeDesc[this.language]),
+            .filter((t) => t.Type === type)
+            .map((t) => t.TypeDesc[this.language]),
       })).filter((t) => t.values.length);
     },
     itemOperationSchedule() {
@@ -308,29 +292,31 @@ export default {
         const stop = new Date(s.Stop);
         const now = new Date();
         return (
-          (((s.Type === '1' || s.Type === '2') && s.OperationScheduleTime) ||
-            s.Type === '3') &&
-          now.getTime() <= stop.getTime() &&
-          now.getTime() >= start.getTime()
+            (((s.Type === '1' || s.Type === '2') && s.OperationScheduleTime) ||
+                s.Type === '3') &&
+            now.getTime() <= stop.getTime() &&
+            now.getTime() >= start.getTime()
         );
       });
     },
     getItemScheduleDays() {
       return (scheduleTime) =>
-        SCHEDULE_DAYS.map((day) =>
-          scheduleTime[day] ? this.$t(`scheduleDays.${day}`) : null
-        ).filter((day) => day != null).join(', ');
+          SCHEDULE_DAYS.map((day) =>
+              scheduleTime[day] ? this.$t(`scheduleDays.${day}`) : null
+          ).filter((day) => day != null).join(', ');
     },
+    personCount() {
+      return this.item?.AdditionalArticleInfos[this.language]?.Elements?.personen || ''
+    },
+    preparationTime() {
+      return this.item?.AdditionalArticleInfos[this.language]?.Elements?.zeit || ''
+    },
+    ingredients() {
+      return this.this.item?.AdditionalArticleInfos[this.language]?.Elements?.zutat
+    }
   },
   created() {
-    if (this.contentType === 'Gastronomy') {
-      this.loadGastronomyItem();
-      this.loadGastronomyTypeList();
-    } else if (this.contentType === 'POI') {
-      this.loadPoiItem();
-    } else if (this.contentType === 'Activity') {
-      this.loadActivityItem();
-    }
+    this.loadRecipeItem()
   },
   filters: {
     dateFormat(dateString) {
@@ -338,19 +324,20 @@ export default {
     },
   },
   methods: {
-    loadGastronomyItem() {
-      new GastronomyApi()
-        .gastronomyGetGastronomySingle(this.contentId)
-        .then((value) => {
-          this.item = value.data;
-        });
+    loadRecipeItem() {
+      new ArticleApi()
+          .articleGetActivitySingle(this.contentId)
+          .then((value) => {
+            this.item = value.data;
+            console.log(this.item)
+          });
     },
     loadGastronomyTypeList() {
       new GastronomyApi()
-        .gastronomyGetAllGastronomyTypesList()
-        .then((value) => {
-          this.gastronomyTypes = value.data;
-        });
+          .gastronomyGetAllGastronomyTypesList()
+          .then((value) => {
+            this.gastronomyTypes = value.data;
+          });
     },
     loadPoiItem() {
       new PoiApi().poiGetPoiSingle(this.contentId).then((value) => {
@@ -359,10 +346,10 @@ export default {
     },
     loadActivityItem() {
       new ActivityApi()
-        .activityGetActivitySingle(this.contentId)
-        .then((value) => {
-          this.item = value.data;
-        });
+          .activityGetActivitySingle(this.contentId)
+          .then((value) => {
+            this.item = value.data;
+          });
     },
     close() {
       this.$emit('close');
@@ -370,10 +357,31 @@ export default {
     openImageDetail(image) {
       this.imageUrl = image.ImageUrl;
       console.log(this.imageUrl)
+      this.selectedImage = image;
       this.showImage = true;
     },
     closeImageDetail(){
       this.showImage = false;
+    },
+    nextImage() {
+      const currentIndex = this.imageGallery.indexOf(this.selectedImage)
+      if(currentIndex+1 < this.imageGallery.length) {
+        this.selectedImage = this.imageGallery[currentIndex+1]
+        this.imageUrl = this.selectedImage.ImageUrl
+      } else {
+        this.selectedImage = this.imageGallery[0]
+        this.imageUrl = this.selectedImage.ImageUrl
+      }
+    },
+    lastImage() {
+      const currentIndex = this.imageGallery.indexOf(this.selectedImage)
+      if(currentIndex-1 >= 0) {
+        this.selectedImage = this.imageGallery[currentIndex-1]
+        this.imageUrl = this.selectedImage.ImageUrl
+      } else {
+        this.selectedImage = this.imageGallery[this.imageGallery.length-1]
+        this.imageUrl = this.selectedImage.ImageUrl
+      }
     }
   },
 };
@@ -386,7 +394,9 @@ export default {
 .title {
   background-color: #e8ecf1;
   padding: 2rem;
-  margin-bottom: 0 !important;
+  opacity: 0.8;
+  width: 100%;
+  max-height: 400px;
 }
 
 h2 {
@@ -495,4 +505,19 @@ ul {
   padding-top: 8px;
   object-fit: cover;
 }
+
+.title-image {
+  max-height: 400px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 0 !important;
+  overflow: hidden;
+}
+
 </style>

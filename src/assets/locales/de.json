@@ -5,6 +5,7 @@
     "phone": "Telefon",
     "web": "Web",
     "categories": "Kategorien",
+    "lastChange": "Letzte Aktualisierung",
     "scheduleTypes": {
         "1": "Geöffnet",
         "2": "Geschlossen"

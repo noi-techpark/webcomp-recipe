@@ -11,7 +11,9 @@
       <div v-for="item of items" :key="item.id" @click.prevent="showDetail(item.Id)" class="item-container">
         <hr class="solid">
         <div class="list-item">
-          <div class="thumbnail" v-if="item.ImageGallery === null || item.ImageGallery.length === 0"></div>
+          <div v-if="item.ImageGallery === null || item.ImageGallery.length === 0">
+            <img class="thumbnail" :src="placeholderImage"/>
+          </div>
           <div v-else><img class="thumbnail" :src="item.ImageGallery[0].ImageUrl"/></div>
           <div class="info">
             <div class="title">{{ getTitle(item, language) }}</div>
@@ -25,8 +27,9 @@
       <img src="@/assets/img/loading.gif"/>
     </div>
     <div class="noResult" v-else>{{ $t('noResults')}}</div>
+    <div v-if="items.length === 1" class="item-container"></div>
     <div class="bottom-divider" v-if="items.length > 0"><hr class="solid"></div>
-    <div class="bottom-divider bottom-divider2" v-if="items.length > 0"><hr class="solid"></div>
+    <div class="bottom-divider bottom-divider2" v-if="items.length > 1"><hr class="solid"></div>
     <paging
         :current-page="currentPage"
         :total-pages="totalPages"
@@ -53,11 +56,15 @@ export default {
     },
     pageSize: {
       type: Number,
-      default: 20
+      default: 2
     },
     category: {
       type: String,
       default: null
+    },
+    currentPage: {
+      type: Number,
+      default: 1
     }
   },
   data() {
@@ -65,7 +72,6 @@ export default {
       items: [],
       gastronomyTypes: [],
       activityTypes: [],
-      currentPage: 0,
       totalPages: 0,
       isLoading: false
     };
@@ -73,21 +79,26 @@ export default {
   created() {
     this.loadRecipeList(1)
   },
+  computed: {
+    placeholderImage() {
+      return require('../assets/img/rezept.svg')
+    }
+  },
   methods: {
     nextPage() {
       this.items = []
       this.loadRecipeList(this.currentPage + 1)
-      this.currentPage = this.currentPage + 1
+      this.$emit('change-current-page', this.currentPage + 1);
     },
     lastPage() {
       this.items = []
       this.loadRecipeList(this.currentPage - 1)
-      this.currentPage = this.currentPage - 1
+      this.$emit('change-current-page', this.currentPage - 1);
     },
     goToPage(pageNum) {
       this.items = []
       this.loadRecipeList(pageNum)
-      this.currentPage = pageNum
+      this.$emit('change-current-page', pageNum);
     },
     showDetail(contentId) {
       this.$emit('show-detail', contentId);
@@ -99,11 +110,12 @@ export default {
           this.contentIdList,null,null,null,true,null,null,
           this.language,null,null,[]).then((value => {
         this.items = value?.data?.Items ?? []
+        console.log(this.items)
         if(this.items != null) {
-          this.items = this.items.filter((item) => item?.Detail?.[this.language] != null && +
+          this.items = this.items.filter((item) => item?.Detail?.[this.language] != null &&
               item?.Detail?.[this.language]?.Title != null && item?.Detail?.[this.language]?.Title !== "")
         }
-        this.currentPage = value?.data?.CurrentPage
+        this.$emit('change-current-page', value?.data?.CurrentPage);
         this.totalPages = value?.data?.TotalPages
         console.log(value)
         this.isLoading = false;

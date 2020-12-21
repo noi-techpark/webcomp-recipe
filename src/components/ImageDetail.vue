@@ -1,8 +1,15 @@
 <template>
-  <div class="modal" @click="closeImage">
-    <span class="close">&times;</span>
+  <div class="modal">
+    <span class="close" @click="closeImage">&times;</span>
 
-    <img class="modal-content" :src="imgUrl">
+    <div class="modal-content" style="display: flex; align-items: center; justify-content: space-between;" :style="imageStyle">
+      <div class="img-button" @click="lastImage" v-if="hasMultipleImgs">
+        <img src="@/assets/img/arrow_left.svg" width="50" height="50"/>
+      </div>
+      <div class="img-button" @click="nextImage" v-if="hasMultipleImgs">
+        <img src="@/assets/img/arrow_right.svg" width="50" height="50"/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -12,11 +19,32 @@ export default {
   props: {
     imgUrl: {
       type: String
+    },
+    hasMultipleImgs: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    imageStyle() {
+      return {
+        backgroundImage: 'url('+ this.imgUrl + ') ',
+        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        minHeight: '100px',
+        backgroundRepeat: 'no-repeat'
+      }
     }
   },
   methods: {
     closeImage() {
       this.$emit('close');
+    },
+    nextImage() {
+      this.$emit('next-image');
+    },
+    lastImage() {
+      this.$emit('last-image');
     }
   }
 }
@@ -42,6 +70,11 @@ export default {
   display: block;
   width: 80%;
   max-width: 1200px;
+  height: 100%;
+}
+
+.img-content {
+  max-width: 80%;
 }
 
 .modal-content {
@@ -83,5 +116,21 @@ export default {
   .modal-content {
     width: 100%;
   }
+  .img-content {
+    max-width: 100%;
+  }
+}
+
+.img-button {
+  width: 50px;
+  text-align: center;
+  background-color:rgba(0, 0, 0, 0.3);
+  height: 50px;
+  border-radius: 25px;
+  margin: 8px
+}
+
+.img-button:hover {
+  background-color:rgba(0, 0, 0, 0.7);
 }
 </style>

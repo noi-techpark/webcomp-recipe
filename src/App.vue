@@ -7,8 +7,8 @@
         :content-type="contentType"
         @close="closeDetail"
     />
-    <items-list v-else @show-detail="showDetail" :language="language" :contentType="contentType"
-                :contentIdList="contentIdList" :pageSize="pageSize" :category="category"/>
+    <items-list v-else @show-detail="showDetail" @change-current-page="changeCurrentPage" :language="language" :contentType="contentType"
+                :contentIdList="contentIdList" :pageSize="pageSize" :category="category" :current-page="currentPage"/>
   </div>
 </template>
 
@@ -46,6 +46,7 @@ export default Vue.extend({
   data() {
     return {
       detailContentId: null,
+      currentPage: 1
     };
   },
   computed: {
@@ -75,6 +76,9 @@ export default Vue.extend({
     },
     closeDetail() {
       this.detailContentId = null;
+    },
+    changeCurrentPage(pageNum) {
+      this.currentPage = pageNum;
     }
   },
 });
