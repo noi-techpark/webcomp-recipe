@@ -1,13 +1,25 @@
 <template>
   <div class="list">
-    <h2 class="page-title">{{ $t('recipes') }}</h2>
+    <div class="header">
+      <h2 class="page-title">{{ $t('recipes') }}</h2>
+      <div class="list-grid-switch">
+        <div class="list-switch-button" @click="setShowList(true)">
+          <img v-if="showList" src="@/assets/img/list_blue.svg"/>
+          <img v-else src="@/assets/img/list.svg"/>
+        </div>
+        <div class="grid-switch-button" @click="setShowList(false)">
+          <img v-if="showList" src="@/assets/img/grid.svg"/>
+          <img v-else src="@/assets/img/grid_blue.svg"/>
+        </div>
+      </div>
+    </div>
     <paging
         :current-page="currentPage"
         :total-pages="totalPages"
         @next-page="nextPage"
         @last-page="lastPage"
         @go-to-page="goToPage"></paging>
-    <template v-if="items.length > 0">
+    <template v-if="items.length > 0 && showList">
       <div v-for="item of items" :key="item.id" @click.prevent="showDetail(item.Id)" class="item-container">
         <hr class="solid">
         <div class="list-item">
@@ -23,13 +35,38 @@
         </div>
       </div>
     </template>
+    <template v-if="items.length > 0 && !showList">
+      <div v-for="item of items" :key="item.id" @click.prevent="showDetail(item.Id)" class="grid-container">
+        <div class="info-grid">
+          <div v-if="item.ImageGallery === null || item.ImageGallery.length === 0">
+            <img class="recipe-image" :src="placeholderImage"/>
+          </div>
+          <div v-else><img class="recipe-image" :src="item.ImageGallery[0].ImageUrl"/></div>
+          <div class="grid-info-detail">
+            <div class="grid-title">{{ getTitle(item, language) }}</div>
+            <div class="grid-short-info">{{ getGastronomyShortInfo(item) }}</div>
+            <hr class="recipe-divider">
+            <div class="recipe-info-groups">
+              <div class="recipe-info-group">
+                <img src="@/assets/img/ic_preparationtime.svg"/>
+                <span class="recipe-info-text">{{ $t('preparationTime') }}:  {{ getPreparationTime(item) }}</span>
+              </div>
+              <div class="recipe-info-group">
+                <img src="@/assets/img/ic_persons.svg"/>
+                <span class="recipe-info-text">{{ $t('persons') }}: {{ getPersonCount(item) }} </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
     <div v-else-if="isLoading" class="loading-spinner">
       <img src="@/assets/img/loading.gif"/>
     </div>
     <div class="noResult" v-else>{{ $t('noResults')}}</div>
     <div v-if="items.length === 1" class="item-container"></div>
-    <div class="bottom-divider" v-if="items.length > 0"><hr class="solid"></div>
-    <div class="bottom-divider bottom-divider2" v-if="items.length > 1"><hr class="solid"></div>
+    <div class="bottom-divider" v-if="items.length > 0 && showList"><hr class="solid"></div>
+    <div class="bottom-divider bottom-divider2" v-if="items.length > 1 && showList"><hr class="solid"></div>
     <paging
         :current-page="currentPage"
         :total-pages="totalPages"
@@ -65,7 +102,7 @@ export default {
     currentPage: {
       type: Number,
       default: 1
-    }
+    },
   },
   data() {
     return {
@@ -73,7 +110,8 @@ export default {
       gastronomyTypes: [],
       activityTypes: [],
       totalPages: 0,
-      isLoading: false
+      isLoading: false,
+      showList: true
     };
   },
   created() {
@@ -125,23 +163,17 @@ export default {
       return item?.Detail?.[language]?.Title ?? ''
     },
     getGastronomyShortInfo(item) {
-      return ''
-      /*const shortInfo = []
-      shortInfo.push(...this.getGastronomyTypes(item))
-      if(item?.ContactInfos?.[this.language]?.City) {
-        const location = this.$t('location') + ': ' + (item.ContactInfos?.[this.language].City)
-        shortInfo.push(location)
-      }
-      if(item?.ContactInfos?.en?.Phonenumber) {
-        const telephone = this.$t('phone') + ': ' + (item.ContactInfos.en.Phonenumber)
-        shortInfo.push(telephone)
-      }
-      if(item?.ContactInfos?.en?.Url){
-        const url = this.$t('web') + ': ' + (item.ContactInfos.en.Url)
-        shortInfo.push(url)
-      }
-      return shortInfo.filter((info) => info != null).join(', ')*/
+      return item?.Detail[this.language].IntroText ?? '';
     },
+    setShowList(active) {
+      this.showList = active;
+    },
+    getPersonCount(item) {
+      return item?.AdditionalArticleInfos[this.language]?.Elements?.personen || ''
+    },
+    getPreparationTime(item) {
+      return item?.AdditionalArticleInfos[this.language]?.Elements?.zeit || '-'
+    }
   },
 };
 </script>
@@ -169,6 +201,14 @@ export default {
     padding-left: 24px;
   }
 
+  .info-grid {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 16px;
+    box-shadow: 0px 3px 6px #00000029;
+  }
+
   hr.solid {
     border-top: 1px solid #CFCFCF;
     margin: 8px 40px 8px 40px;
@@ -179,8 +219,19 @@ export default {
     font-weight: bold;
   }
 
+  .grid-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
   .short-info {
     font-size: 14px;
+    word-break: break-word;
+    color: #888888;
+  }
+
+  .grid-short-info {
+    font-size: 18px;
     word-break: break-word;
     color: #888888;
   }
@@ -216,6 +267,13 @@ export default {
     visibility: hidden;
   }
 
+  .grid-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+
   @media(min-width: 768px){
     .item-container{
       width: 50%;
@@ -227,6 +285,22 @@ export default {
 
     .bottom-divider2 {
       visibility: visible;
+    }
+
+    .grid-container {
+      width: 50%;
+    }
+  }
+
+  @media(min-width: 1024px) {
+    .grid-container {
+      width: 33%;
+    }
+  }
+
+  @media(min-width: 1400px) {
+    .grid-container {
+      width: 25%;
     }
   }
 
@@ -241,4 +315,75 @@ export default {
   .noResult {
     margin-left: 40px;
   }
+
+  .grid-info-detail {
+    padding: 16px
+  }
+
+  .recipe-divider {
+    border-top: 1px solid #E8ECF1;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .recipe-info-text {
+    padding-left: 8px;
+    font-size: 14px;
+    color: #212529;
+  }
+
+  .recipe-info-group {
+    display: flex;
+    width: 50%;
+    align-items: center;
+  }
+
+  .recipe-info-groups {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .recipe-image {
+    max-width: 100%;
+    height: 200px;
+    width: 100%;
+    object-fit: cover
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding-right: 16px;
+  }
+
+  .list-grid-switch {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .list-switch-button {
+    width: 60px;
+    height: 30px;
+    border: solid 1px #E8ECF1;
+    border-radius: 15px 0 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+  }
+
+  .grid-switch-button {
+    width: 60px;
+    height: 30px;
+    border: solid 1px #E8ECF1;
+    border-left: 0;
+    border-radius: 0 15px 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center
+  }
+
 </style>

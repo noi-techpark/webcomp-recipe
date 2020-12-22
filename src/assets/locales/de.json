@@ -40,5 +40,7 @@
         "back": "zurück"
     },
     "noResults": "Keine Ergebnisse gefunden",
-    "recipes": "Rezepte"
+    "recipes": "Rezepte",
+    "preparationTime": "Zubereitungszeit",
+    "persons": "Personen"
 }
