@@ -244,6 +244,7 @@ export default {
     font-size: 18px;
     word-break: break-word;
     color: #888888;
+    flex-grow: 1;
   }
 
   .page-title {
@@ -327,13 +328,17 @@ export default {
   }
 
   .grid-info-detail {
-    padding: 16px
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   .recipe-divider {
     border-top: 1px solid #E8ECF1;
     margin-top: 16px;
     margin-bottom: 16px;
+    width: 100%;
   }
 
   .recipe-info-text {
@@ -415,7 +420,7 @@ export default {
     width: 100%;
     padding: 10px;
     border: none;
-    flex-grow: 1
+    flex-grow: 1;
   }
 
   .search-button {
