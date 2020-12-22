@@ -191,7 +191,7 @@ export default {
   .list-item {
     display: flex;
     flex-direction: row;
-    padding: 8px 40px 8px 40px;
+    padding: 8px 20px 8px 20px;
     align-items: center;
   }
 
@@ -221,7 +221,7 @@ export default {
 
   hr.solid {
     border-top: 1px solid #CFCFCF;
-    margin: 8px 40px 8px 40px;
+    margin: 8px 20px 8px 20px;
   }
 
   .title {
@@ -250,8 +250,8 @@ export default {
   .page-title {
     font-weight: bold;
     font-size: 36px;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -371,7 +371,7 @@ export default {
     justify-content: space-between;
     width: 100%;
     align-items: center;
-    padding-right: 16px;
+    padding-right: 20px;
   }
 
   .list-grid-switch {
@@ -424,7 +424,7 @@ export default {
   }
 
   .search-button {
-    padding-right: 12px;
+    padding-right: 20px;
   }
 
 </style>
