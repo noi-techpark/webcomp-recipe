@@ -13,6 +13,10 @@
         </div>
       </div>
     </div>
+    <div class="search-bar">
+      <input type="text" class="search-input" placeholder="Search recipe" v-model="searchInput">
+      <img src="@/assets/img/ic_search.svg" class="search-button" @click="loadRecipeList(currentPage)"/>
+    </div>
     <paging
         :current-page="currentPage"
         :total-pages="totalPages"
@@ -111,7 +115,8 @@ export default {
       activityTypes: [],
       totalPages: 0,
       isLoading: false,
-      showList: true
+      showList: true,
+      searchInput: ''
     };
   },
   created() {
@@ -142,11 +147,12 @@ export default {
       this.$emit('show-detail', contentId);
     },
     loadRecipeList(pageNum) {
+      console.log('load recipe list')
       this.isLoading = true;
       const articleApi = new ArticleApi()
       articleApi.articleGetArticleList(pageNum, this.pageSize, 32, null, null,
           this.contentIdList,null,null,null,true,null,null,
-          this.language,null,null,[]).then((value => {
+          this.language,null,this.searchInput,[]).then((value => {
         this.items = value?.data?.Items ?? []
         console.log(this.items)
         if(this.items != null) {
@@ -178,6 +184,10 @@ export default {
 };
 </script>
 <style scoped>
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
+
   .list-item {
     display: flex;
     flex-direction: row;
@@ -384,6 +394,32 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center
+  }
+
+  ::placeholder {
+    color: #1F1F1F80;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  .search-bar {
+    width: 100%;
+    margin: 16px;
+    display: flex;
+    border: 1px solid #E8ECF1;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    flex-grow: 1
+  }
+
+  .search-button {
+    padding-right: 12px;
   }
 
 </style>
