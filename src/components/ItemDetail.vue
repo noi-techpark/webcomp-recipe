@@ -20,7 +20,7 @@
       </div>
 
       <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
-        <div v-if="itemDetail.BaseText" class="text content-box">
+        <div class="text content-box">
           <img v-if="titleImage" :src="titleImage" class="image"/>
           <div v-html="articleText"></div>
         </div>
@@ -132,7 +132,7 @@ export default {
       return this.item?.Detail?.[this.language] || {};
     },
     articleText() {
-      return this.item?.AdditionalArticleInfos?.de?.Elements?.zubereitungstext || ''
+      return this.item?.AdditionalArticleInfos?.[this.language]?.Elements?.zubereitungstext || ''
     },
     itemProps() {
       if (!this.item) {
@@ -405,19 +405,17 @@ h1 {
 .ingredient-title {
   font-size: 28px;
   font-weight: bold;
-  margin-left: 25px;
   color: #2E3131;
 }
 
 .ingredients-container {
   width: 100%;
+  margin-top: 16px;
 }
 
 .ingredients-box {
   background-color: #E8ECF1;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  padding-right: 16px;
+  padding: 25px 16px 25px 25px;
 }
 
 .content-box {
@@ -427,6 +425,7 @@ h1 {
 @media(min-width: 768px) {
   .ingredients-container {
     width: 33%;
+    margin-top: 0;
   }
 
   .ingredients-box {
