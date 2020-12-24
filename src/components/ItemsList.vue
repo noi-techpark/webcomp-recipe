@@ -39,7 +39,7 @@
         </div>
       </div>
     </template>
-    <template v-if="items.length > 0 && !showList">
+    <template v-else-if="items.length > 0 && !showList">
       <div v-for="item of items" :key="item.id" @click.prevent="showDetail(item.Id)" class="grid-container">
         <div class="info-grid">
           <div v-if="item.ImageGallery === null || item.ImageGallery.length === 0">
@@ -53,11 +53,11 @@
             <div class="recipe-info-groups">
               <div class="recipe-info-group">
                 <img src="@/assets/img/ic_preparationtime.svg"/>
-                <span class="recipe-info-text">{{ $t('preparationTime') }}:  {{ getPreparationTime(item) }}</span>
+                <span class="recipe-info-text">{{ getPreparationTime(item) }}</span>
               </div>
               <div class="recipe-info-group">
                 <img src="@/assets/img/ic_persons.svg"/>
-                <span class="recipe-info-text">{{ $t('persons') }}: {{ getPersonCount(item) }} </span>
+                <span class="recipe-info-text">{{ getPersonCount(item) }} </span>
               </div>
             </div>
           </div>
@@ -178,7 +178,11 @@ export default {
       return item?.AdditionalArticleInfos[this.language]?.Elements?.personen || ''
     },
     getPreparationTime(item) {
-      return item?.AdditionalArticleInfos[this.language]?.Elements?.zeit || '-'
+      let time = item?.AdditionalArticleInfos[this.language]?.Elements?.zeit || '-'
+      if(time !== '-'){
+        time = time.toString() + ' h';
+      }
+      return time
     }
   },
 };
@@ -220,7 +224,7 @@ export default {
   }
 
   hr.solid {
-    border-top: 1px solid #CFCFCF;
+    border-top: 1px solid #E8ECF1;
     margin: 8px 20px 8px 20px;
   }
 

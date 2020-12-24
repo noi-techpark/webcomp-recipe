@@ -54,7 +54,7 @@ export default Vue.extend({
       return this.contentIdList !== null ? this.contentIdList.split(',') : [];
     },
     islistAvailable() {
-      return this.contentIds.length > 1;
+      return this.contentIds.length != 1;
     },
   },
   watch: {
