@@ -8,7 +8,8 @@
         @close="closeDetail"
     />
     <items-list v-else @show-detail="showDetail" @change-current-page="changeCurrentPage" :language="language" :contentType="contentType"
-                :contentIdList="contentIdList" :pageSize="pageSize" :category="category" :current-page="currentPage"/>
+                :contentIdList="contentIdList" :pageSize="pageSize" :category="category" :current-page="currentPage"
+                :defaultPresentation="defaultPresentation"/>
   </div>
 </template>
 
@@ -41,6 +42,10 @@ export default Vue.extend({
     pageSize: {
       type: Number,
       default: 20
+    },
+    defaultPresentation: {
+      type: String,
+      default: 'grid'
     }
   },
   data() {

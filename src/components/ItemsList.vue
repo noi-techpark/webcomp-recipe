@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="search-bar">
-      <input type="text" class="search-input" placeholder="Search recipe" v-model="searchInput">
+      <input type="text" class="search-input" :placeholder="$t('searchRecipe')" v-model="searchInput">
       <img src="@/assets/img/ic_search.svg" class="search-button" @click="loadRecipeList(currentPage)"/>
     </div>
     <paging
@@ -107,6 +107,10 @@ export default {
       type: Number,
       default: 1
     },
+    defaultPresentation: {
+      type: String,
+      default: 'list'
+    }
   },
   data() {
     return {
@@ -115,9 +119,18 @@ export default {
       activityTypes: [],
       totalPages: 0,
       isLoading: false,
-      showList: true,
-      searchInput: ''
+      showList: this.defaultPresentation === 'list',
+      searchInput: '',
     };
+  },
+  watch: {
+    defaultPresentation(newValue) {
+      if(newValue === 'list') {
+        this.showList = true;
+      } else {
+        this.showList = false;
+      }
+    }
   },
   created() {
     this.loadRecipeList(1)
