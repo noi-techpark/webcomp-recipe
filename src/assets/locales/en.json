@@ -1,1 +1,49 @@
-{}
+{
+  "altitude": "Altitude",
+  "difficulty": "Difficulty",
+  "location": "Place",
+  "phone": "Phone",
+  "web": "Web",
+  "categories": "Categories",
+  "lastChange": "Last update",
+  "scheduleTypes": {
+    "1": "Open",
+    "2": "Closed"
+  },
+  "timeCodes": {
+    "1": "General opening hours",
+    "2": "Warm meals",
+    "3": "Pizza",
+    "4": "Snacks"
+  },
+  "scheduleDays": {
+    "Monday": "Mon",
+    "Tuesday": "Tue",
+    "Wednesday": "Wed",
+    "Thuresday": "Thu",
+    "Friday": "Fri",
+    "Saturday": "Sat",
+    "Sunday": "Sun"
+  },
+  "mainType": "Main Category",
+  "subType": "Subcategory",
+  "altitudeDifference": "Height difference",
+  "altitudeHighestPoint": "Highest point",
+  "altitudeLowestPoint": "Lowest point",
+  "Gastronomy": "Gastronomy",
+  "Activity": "Activities",
+  "props": {
+  },
+  "yes": "Yes",
+  "paging": {
+    "next": "Next",
+    "back": "Back"
+  },
+  "noResults": "No results found",
+  "recipes": "Recipes",
+  "preparationTime": "Preparation time",
+  "persons": "Persons",
+  "back": "Back",
+  "searchRecipe": "Search recipe",
+  "ingredients": "Ingredients"
+}

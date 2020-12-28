@@ -29,7 +29,7 @@
         </div>
         <div class="ingredients-container">
           <div class="ingredients-box">
-            <div class="ingredient-title">Zutaten</div>
+            <div class="ingredient-title">{{ $t('ingredients') }}</div>
             <div v-html="ingredients"></div>
           </div>
         </div>
