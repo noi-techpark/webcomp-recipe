@@ -21,7 +21,7 @@
 
       <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
         <div class="text content-box">
-          <img v-if="titleImage" :src="titleImage" class="image"/>
+          <img v-if="titleImage" :src="titleImage" class="header-image"/>
           <div v-html="articleText"></div>
         </div>
         <div class="ingredients-container">
@@ -53,7 +53,7 @@
       </div>
 
       <div v-if="imageGallery">
-        <img v-for="(image, i) of imageGallery" :key="i" :src="image.ImageUrl" height="250" width="250"
+        <img v-for="(image, i) of imageGallery" :key="i" :src="image" height="200" width="200"
              class="image" @click="openImageDetail(image)"/>
       </div>
 
@@ -400,6 +400,7 @@ h1 {
   padding-left: 8px;
   font-size: 14px;
   color: #212529;
+  overflow-wrap: break-word;
 }
 
 .ingredient-title {
@@ -467,9 +468,13 @@ h1 {
   margin-bottom: 16px;
 }
 
-.image {
+.header-image {
   height: 430px;
   max-width: 100%;
+}
+
+div ::v-deep ul {
+  padding-inline-start: 20px;
 }
 
 </style>
