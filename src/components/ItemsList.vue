@@ -115,8 +115,6 @@ export default {
   data() {
     return {
       items: [],
-      gastronomyTypes: [],
-      activityTypes: [],
       totalPages: 0,
       isLoading: false,
       showList: this.defaultPresentation === 'list',

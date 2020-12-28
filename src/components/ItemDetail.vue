@@ -70,24 +70,6 @@
 import {ArticleApi, ODHTagApi} from '@/api';
 import ImageDetail from "@/components/ImageDetail";
 
-const GASTRONOMY_TYPES = [
-  'DishCodes',
-  'CuisineCodes',
-  'FacilityCodes_CreditCard',
-  'FacilityCodes_Equipment',
-  'FacilityCodes_QualitySeals',
-];
-
-const SCHEDULE_DAYS = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thuresday',
-  'Friday',
-  'Saturday',
-  'Sunday',
-];
-
 export default {
   components: {ImageDetail},
   props: {
@@ -324,12 +306,6 @@ h2 {
 
 .categories {
   padding-bottom: 8px;
-}
-
-.gastronomyTypes {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
 }
 
 .category{
