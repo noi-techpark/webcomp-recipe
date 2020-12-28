@@ -5,6 +5,7 @@
         :content-id="detailContentId"
         :is-list-available="islistAvailable"
         :content-type="contentType"
+        :language="language"
         @close="closeDetail"
     />
     <items-list v-else @show-detail="showDetail" @change-current-page="changeCurrentPage" :language="language" :contentType="contentType"

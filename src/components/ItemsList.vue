@@ -33,7 +33,7 @@
           <div v-else><img class="thumbnail" :src="item.ImageGallery[0].ImageUrl"/></div>
           <div class="info">
             <div class="title">{{ getTitle(item, language) }}</div>
-            <div class="short-info">{{ getGastronomyShortInfo(item) }}</div>
+            <div class="short-info">{{ getRecipeShortInfo(item) }}</div>
           </div>
           <img src="@/assets/img/arrow_right.svg" width="28" height="28"/>
         </div>
@@ -48,7 +48,7 @@
           <div v-else><img class="recipe-image" :src="item.ImageGallery[0].ImageUrl"/></div>
           <div class="grid-info-detail">
             <div class="grid-title">{{ getTitle(item, language) }}</div>
-            <div class="grid-short-info">{{ getGastronomyShortInfo(item) }}</div>
+            <div class="grid-short-info">{{ getRecipeShortInfo(item) }}</div>
             <hr class="recipe-divider">
             <div class="recipe-info-groups">
               <div class="recipe-info-group">
@@ -163,8 +163,8 @@ export default {
       console.log('load recipe list')
       this.isLoading = true;
       const articleApi = new ArticleApi()
-      articleApi.articleGetArticleList(pageNum, this.pageSize, 32, null, null,
-          this.contentIdList,null,null,null,true,null,null,
+      articleApi.articleGetArticleList(pageNum, this.pageSize, 32, null, this.contentIdList,
+          null,null,null,null,true,null,null,
           this.language,null,this.searchInput,[]).then((value => {
         this.items = value?.data?.Items ?? []
         console.log(this.items)
@@ -181,7 +181,7 @@ export default {
     getTitle(item, language) {
       return item?.Detail?.[language]?.Title ?? ''
     },
-    getGastronomyShortInfo(item) {
+    getRecipeShortInfo(item) {
       return item?.Detail[this.language].IntroText ?? '';
     },
     setShowList(active) {
@@ -249,6 +249,7 @@ export default {
   .grid-title {
     font-size: 24px;
     font-weight: bold;
+    flex-grow: 1;
   }
 
   .short-info {
@@ -259,9 +260,12 @@ export default {
 
   .grid-short-info {
     font-size: 18px;
-    word-break: break-word;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
     color: #888888;
     flex-grow: 1;
+    max-height: 150px;
+    overflow: hidden;
   }
 
   .page-title {
