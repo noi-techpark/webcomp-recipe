@@ -15,48 +15,43 @@ ToDo: Description of the project.
 
 ```html
 <script src="https://unpkg.com/vue"></script>
-<script src="./webcomp-tourism-detail.min.js"></script>
+<script src="./webcomp-recipe.js"></script>
 
-<webcomp-tourism-detail></webcomp-tourism-detail>
+
+<webcomp-recipe></webcomp-recipe>
 ```
 
 ### Attributes
-
-#### contentType
-
-Content type of the webcomponent data
-
-Type: string\
-Options: ["Gastronomy", "Activity", "POI"]
 
 #### contentIdList
 
 List of content Ids separated by a comma. Example: "1,2,3" 
 
-Type: String
-
-#### category
-
-Single category code to filter the list
-
 Type: String\
-Options:\
-    - Gastronomy: BITMASK values: 1 = (Restaurant), 2 = (Bar / Café / Bistro), 4 = (Pub / Disco), 8 = (Apres Ski), 16 = (Jausenstation), 32 = (Pizzeria), 64 = (Bäuerlicher Schankbetrieb), 128 = (Buschenschank), 256 = (Hofschank), 512 = (Törggele Lokale), 1024 = (Schnellimbiss), 2048 = (Mensa), 4096 = (Vinothek /Weinhaus / Taverne), 8192 = (Eisdiele), 16348 = (Gasthaus), 32768 = (Gasthof), 65536 = (Braugarten), 131072 = (Schutzhütte), 262144 = (Alm), 524288 = (Skihütte)\
-    - Activity: 'null' = Filter disabled, possible values: BITMASK: 'Mountains = 1','Cycling = 2','Local tours = 4','Horses = 8','Hiking = 16','Running and fitness = 32','Cross-country ski-track = 64','Tobbogan run = 128','Slopes = 256','Lifts = 512'\
-    - POI: 'null' = Filter disabled, possible values: BITMASK 'Doctors, Pharmacies = 1','Shops = 2','Culture and sights= 4','Nightlife and entertainment = 8','Public institutions = 16','Sports and leisure = 32','Traffic and transport = 64', 'Service providers' = 128, 'Craft' = 256
+Default: null
 
 #### langugage
 
 Language of the data 
 
 Type: string\
-Options: ["de", "en", "it"]
+Options: ["de", "en", "it"]\
+Default: "de"
 
 #### pageSize
 
 Number of items that are shown in one page
 
-Type: Number
+Type: Number\
+Default: 20
+
+### defaultPresentation
+
+Default presentation of recipe list
+
+Type: string\
+Options: ["list", "grid"]\
+Default: "list"
 
 ## Getting started
 
@@ -77,13 +72,13 @@ For a ready to use Docker environment with all prerequisites already installed a
 Get a copy of the repository:
 
 ```bash
-ToDo: git clone https://github.com/noi-techpark/project-name.git
+ToDo: git clone https://github.com/noi-techpark/webcomp-recipe.git
 ```
 
 Change directory:
 
 ```bash
-ToDo: cd project-name/
+ToDo: cd webcomp-recipe/
 ```
 
 ### Dependencies
