@@ -2,12 +2,16 @@
   <div class="modal">
     <span class="close" @click="closeImage">&times;</span>
 
-    <div class="modal-content" style="display: flex; align-items: center; justify-content: space-between;" :style="imageStyle">
+    <div
+      class="modal-content"
+      style="display: flex; align-items: center; justify-content: space-between;"
+      :style="imageStyle"
+    >
       <div class="img-button" @click="lastImage" v-if="hasMultipleImgs">
-        <img src="@/assets/img/arrow_left.svg" width="50" height="50"/>
+        <img src="@/assets/img/arrow_left.svg" width="50" height="50" />
       </div>
       <div class="img-button" @click="nextImage" v-if="hasMultipleImgs">
-        <img src="@/assets/img/arrow_right.svg" width="50" height="50"/>
+        <img src="@/assets/img/arrow_right.svg" width="50" height="50" />
       </div>
     </div>
   </div>
@@ -15,26 +19,26 @@
 
 <script>
 export default {
-  name: "ImageDetail",
+  name: 'ImageDetail',
   props: {
     imgUrl: {
-      type: String
+      type: String,
     },
     hasMultipleImgs: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   computed: {
     imageStyle() {
       return {
-        backgroundImage: 'url('+ this.imgUrl + ') ',
+        backgroundImage: 'url(' + this.imgUrl + ') ',
         backgroundSize: 'contain',
         backgroundPosition: 'center',
         minHeight: '100px',
-        backgroundRepeat: 'no-repeat'
-      }
-    }
+        backgroundRepeat: 'no-repeat',
+      };
+    },
   },
   methods: {
     closeImage() {
@@ -45,13 +49,12 @@ export default {
     },
     lastImage() {
       this.$emit('last-image');
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 .modal {
   display: flex;
   position: fixed;
@@ -61,8 +64,8 @@ export default {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.9);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .modal-content {
@@ -85,13 +88,21 @@ export default {
 }
 
 @-webkit-keyframes zoom {
-  from {-webkit-transform:scale(0)}
-  to {-webkit-transform:scale(1)}
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
 }
 
 @keyframes zoom {
-  from {transform:scale(0)}
-  to {transform:scale(1)}
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .close {
@@ -112,7 +123,7 @@ export default {
 }
 
 /* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 700px) {
   .modal-content {
     width: 100%;
   }
@@ -124,13 +135,13 @@ export default {
 .img-button {
   width: 50px;
   text-align: center;
-  background-color:rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   height: 50px;
   border-radius: 25px;
-  margin: 8px
+  margin: 8px;
 }
 
 .img-button:hover {
-  background-color:rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 </style>

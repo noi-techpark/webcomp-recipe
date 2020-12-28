@@ -1,16 +1,25 @@
 <template>
   <div id="app">
     <item-detail
-        v-if="detailContentId"
-        :content-id="detailContentId"
-        :is-list-available="islistAvailable"
-        :content-type="contentType"
-        :language="language"
-        @close="closeDetail"
+      v-if="detailContentId"
+      :content-id="detailContentId"
+      :is-list-available="islistAvailable"
+      :content-type="contentType"
+      :language="language"
+      @close="closeDetail"
     />
-    <items-list v-else @show-detail="showDetail" @change-current-page="changeCurrentPage" :language="language" :contentType="contentType"
-                :contentIdList="contentIdList" :pageSize="pageSize" :category="category" :current-page="currentPage"
-                :defaultPresentation="defaultPresentation"/>
+    <items-list
+      v-else
+      @show-detail="showDetail"
+      @change-current-page="changeCurrentPage"
+      :language="language"
+      :contentType="contentType"
+      :contentIdList="contentIdList"
+      :pageSize="pageSize"
+      :category="category"
+      :current-page="currentPage"
+      :defaultPresentation="defaultPresentation"
+    />
   </div>
 </template>
 
@@ -26,7 +35,7 @@ export default Vue.extend({
   props: {
     contentType: {
       type: String,
-      default: 'Recipe'
+      default: 'Recipe',
     },
     contentIdList: {
       type: String,
@@ -34,25 +43,25 @@ export default Vue.extend({
     },
     category: {
       type: String,
-      default: null
+      default: null,
     },
     language: {
       type: String,
-      default: 'de'
+      default: 'de',
     },
     pageSize: {
       type: Number,
-      default: 20
+      default: 20,
     },
     defaultPresentation: {
       type: String,
-      default: 'grid'
-    }
+      default: 'grid',
+    },
   },
   data() {
     return {
       detailContentId: null,
-      currentPage: 1
+      currentPage: 1,
     };
   },
   computed: {
@@ -85,7 +94,7 @@ export default Vue.extend({
     },
     changeCurrentPage(pageNum) {
       this.currentPage = pageNum;
-    }
+    },
   },
 });
 </script>

@@ -2,26 +2,29 @@
   <div>
     <div class="back-button" @click.prevent="close" v-if="isListAvailable">
       <img src="@/assets/img/arrow_left.svg" />
-      <span style="color: #888888">{{ $t('back')}}</span>
+      <span style="color: #888888">{{ $t('back') }}</span>
     </div>
     <div v-if="item" class="item">
       <h1>{{ itemDetail.Title }}</h1>
 
       <div class="detail-box">
-
         <div class="recipe-info-group">
-          <img src="@/assets/img/ic_preparationtime.svg"/>
-          <span class="recipe-info-text">{{$t('preparationTime')}}: {{ preparationTime }}</span>
+          <img src="@/assets/img/ic_preparationtime.svg" />
+          <span class="recipe-info-text"
+            >{{ $t('preparationTime') }}: {{ preparationTime }}</span
+          >
         </div>
         <div class="recipe-info-group">
-          <img src="@/assets/img/ic_persons.svg"/>
-          <span class="recipe-info-text">{{$t('persons')}}: {{ personCount }} </span>
+          <img src="@/assets/img/ic_persons.svg" />
+          <span class="recipe-info-text"
+            >{{ $t('persons') }}: {{ personCount }}
+          </span>
         </div>
       </div>
 
       <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
         <div class="text content-box">
-          <img v-if="titleImage" :src="titleImage" class="header-image"/>
+          <img v-if="titleImage" :src="titleImage" class="header-image" />
           <div v-html="articleText"></div>
         </div>
         <div class="ingredients-container">
@@ -34,8 +37,8 @@
 
       <div v-if="Object.keys(itemProps).length" class="additional-props-box">
         <ul
-            class="props"
-            :class="{ single: Object.keys(itemProps).length === 1 }"
+          class="props"
+          :class="{ single: Object.keys(itemProps).length === 1 }"
         >
           <li v-for="(value, key) of itemProps" :key="key" class="text">
             <span class="prop-key">{{ $t(`props.${key}`) }}:</span>
@@ -47,31 +50,46 @@
       <div style="display: flex; align-items: center; flex-direction: column">
         <div class="divider"></div>
         <div class="tags">
-          <div v-for="(value, i) of tags" :key="i" class="category">{{ value }}</div>
+          <div v-for="(value, i) of tags" :key="i" class="category">
+            {{ value }}
+          </div>
         </div>
         <div class="divider"></div>
       </div>
 
       <div v-if="imageGallery">
-        <img v-for="(image, i) of imageGallery" :key="i" :src="image" height="200" width="200"
-             class="image" @click="openImageDetail(image)"/>
+        <img
+          v-for="(image, i) of imageGallery"
+          :key="i"
+          :src="image"
+          height="200"
+          width="200"
+          class="image"
+          @click="openImageDetail(image)"
+        />
       </div>
 
       <small class="text">
         {{ $t('lastChange') }}: {{ item.LastChange | dateFormat }}
       </small>
     </div>
-    <image-detail :imgUrl="imageUrl" v-if="showImage"  :hasMultipleImgs="hasMultipleImgs" @close="closeImageDetail"
-                  @next-image="nextImage" @last-image="lastImage"></image-detail>
+    <image-detail
+      :imgUrl="imageUrl"
+      v-if="showImage"
+      :hasMultipleImgs="hasMultipleImgs"
+      @close="closeImageDetail"
+      @next-image="nextImage"
+      @last-image="lastImage"
+    ></image-detail>
   </div>
 </template>
 
 <script>
-import {ArticleApi, ODHTagApi} from '@/api';
-import ImageDetail from "@/components/ImageDetail";
+import { ArticleApi, ODHTagApi } from '@/api';
+import ImageDetail from '@/components/ImageDetail';
 
 export default {
-  components: {ImageDetail},
+  components: { ImageDetail },
   props: {
     contentId: {
       type: String,
@@ -96,25 +114,28 @@ export default {
       odhTags: [],
       showImage: false,
       imageUrl: null,
-      selectedImage: null
+      selectedImage: null,
     };
   },
   computed: {
     titleImage() {
-      const image = this.item?.ImageGallery[0]
-      return image?.ImageUrl || null
+      const image = this.item?.ImageGallery[0];
+      return image?.ImageUrl || null;
     },
     imageGallery() {
-      return this.item?.ImageGallery || []
+      return this.item?.ImageGallery || [];
     },
     hasMultipleImgs() {
-      return this.imageGallery.length>1
+      return this.imageGallery.length > 1;
     },
     itemDetail() {
       return this.item?.Detail?.[this.language] || {};
     },
     articleText() {
-      return this.item?.AdditionalArticleInfos?.[this.language]?.Elements?.zubereitungstext || ''
+      return (
+        this.item?.AdditionalArticleInfos?.[this.language]?.Elements
+          ?.zubereitungstext || ''
+      );
     },
     itemProps() {
       if (!this.item) {
@@ -145,23 +166,31 @@ export default {
       return props;
     },
     personCount() {
-      return this.item?.AdditionalArticleInfos[this.language]?.Elements?.personen || ''
+      return (
+        this.item?.AdditionalArticleInfos[this.language]?.Elements?.personen ||
+        ''
+      );
     },
     preparationTime() {
-      return this.item?.AdditionalArticleInfos[this.language]?.Elements?.zeit || '-'
+      return (
+        this.item?.AdditionalArticleInfos[this.language]?.Elements?.zeit || '-'
+      );
     },
     ingredients() {
-      return this.item?.AdditionalArticleInfos[this.language]?.Elements?.zutat1
+      return this.item?.AdditionalArticleInfos[this.language]?.Elements?.zutat1;
     },
     tags() {
       return this.item?.ODHTags.map((e) => {
-        return this.odhTags.find(x => x.Id === e.Id)?.TagName?.[this.language] || ''
-      })
-    }
+        return (
+          this.odhTags.find((x) => x.Id === e.Id)?.TagName?.[this.language] ||
+          ''
+        );
+      });
+    },
   },
   created() {
-    this.loadRecipeItem()
-    this.loadODHTags(this.language)
+    this.loadRecipeItem();
+    this.loadODHTags(this.language);
   },
   filters: {
     dateFormat(dateString) {
@@ -173,50 +202,50 @@ export default {
       new ODHTagApi()
         .oDHTagGetODHTags(language, null, null, [])
         .then((value) => {
-          this.odhTags = value.data
-          console.log(value)
-        })
+          this.odhTags = value.data;
+          console.log(value);
+        });
     },
     loadRecipeItem() {
       new ArticleApi()
-          .articleGetActivitySingle(this.contentId)
-          .then((value) => {
-            this.item = value.data;
-            console.log(this.item)
-          });
+        .articleGetActivitySingle(this.contentId)
+        .then((value) => {
+          this.item = value.data;
+          console.log(this.item);
+        });
     },
     close() {
       this.$emit('close');
     },
     openImageDetail(image) {
       this.imageUrl = image.ImageUrl;
-      console.log(this.imageUrl)
+      console.log(this.imageUrl);
       this.selectedImage = image;
       this.showImage = true;
     },
-    closeImageDetail(){
+    closeImageDetail() {
       this.showImage = false;
     },
     nextImage() {
-      const currentIndex = this.imageGallery.indexOf(this.selectedImage)
-      if(currentIndex+1 < this.imageGallery.length) {
-        this.selectedImage = this.imageGallery[currentIndex+1]
-        this.imageUrl = this.selectedImage.ImageUrl
+      const currentIndex = this.imageGallery.indexOf(this.selectedImage);
+      if (currentIndex + 1 < this.imageGallery.length) {
+        this.selectedImage = this.imageGallery[currentIndex + 1];
+        this.imageUrl = this.selectedImage.ImageUrl;
       } else {
-        this.selectedImage = this.imageGallery[0]
-        this.imageUrl = this.selectedImage.ImageUrl
+        this.selectedImage = this.imageGallery[0];
+        this.imageUrl = this.selectedImage.ImageUrl;
       }
     },
     lastImage() {
-      const currentIndex = this.imageGallery.indexOf(this.selectedImage)
-      if(currentIndex-1 >= 0) {
-        this.selectedImage = this.imageGallery[currentIndex-1]
-        this.imageUrl = this.selectedImage.ImageUrl
+      const currentIndex = this.imageGallery.indexOf(this.selectedImage);
+      if (currentIndex - 1 >= 0) {
+        this.selectedImage = this.imageGallery[currentIndex - 1];
+        this.imageUrl = this.selectedImage.ImageUrl;
       } else {
-        this.selectedImage = this.imageGallery[this.imageGallery.length-1]
-        this.imageUrl = this.selectedImage.ImageUrl
+        this.selectedImage = this.imageGallery[this.imageGallery.length - 1];
+        this.imageUrl = this.selectedImage.ImageUrl;
       }
-    }
+    },
   },
 };
 </script>
@@ -259,13 +288,13 @@ h2 {
     columns: 1;
   }
 
-  @media(min-width: 768px){
+  @media (min-width: 768px) {
     &:not(.single) {
       columns: 2;
     }
   }
 
-  @media(min-width: 992px){
+  @media (min-width: 992px) {
     &:not(.single) {
       columns: 3;
     }
@@ -308,12 +337,12 @@ h2 {
   padding-bottom: 8px;
 }
 
-.category{
+.category {
   padding: 4px 12px 4px 12px;
   margin-right: 8px;
   margin-top: 8px;
   height: 30px;
-  border: 1px solid #CFCFCF;
+  border: 1px solid #cfcfcf;
   border-radius: 30px;
   opacity: 1;
   text-align: center;
@@ -326,11 +355,11 @@ ul {
 }
 
 .text {
-  color: #949494
+  color: #949494;
 }
 
 .text-dark {
-  color: #2E3131;
+  color: #2e3131;
 }
 
 .image {
@@ -357,7 +386,7 @@ ul {
   display: flex;
   align-items: center;
   padding-bottom: 4px;
-  cursor: pointer
+  cursor: pointer;
 }
 
 h1 {
@@ -382,7 +411,7 @@ h1 {
 .ingredient-title {
   font-size: 28px;
   font-weight: bold;
-  color: #2E3131;
+  color: #2e3131;
 }
 
 .ingredients-container {
@@ -391,15 +420,15 @@ h1 {
 }
 
 .ingredients-box {
-  background-color: #E8ECF1;
+  background-color: #e8ecf1;
   padding: 25px 16px 25px 25px;
 }
 
 .content-box {
-  width: 100%
+  width: 100%;
 }
 
-@media(min-width: 768px) {
+@media (min-width: 768px) {
   .ingredients-container {
     width: 33%;
     margin-top: 0;
@@ -414,19 +443,19 @@ h1 {
   }
 }
 
-.category{
+.category {
   padding: 4px 12px 4px 12px;
   margin-right: 8px;
   margin-top: 8px;
   margin-bottom: 8px;
   height: 30px;
-  border: 1px solid #E8ECF1;
+  border: 1px solid #e8ecf1;
   border-radius: 30px;
   opacity: 1;
   text-align: center;
   align-items: center;
   display: flex;
-  color: #CFCFCF;
+  color: #cfcfcf;
 }
 
 .tags {
@@ -437,7 +466,7 @@ h1 {
 }
 
 .divider {
-  background-color: #E8ECF1;
+  background-color: #e8ecf1;
   height: 1px;
   width: 300px;
   margin-top: 16px;
@@ -452,5 +481,4 @@ h1 {
 div ::v-deep ul {
   padding-inline-start: 20px;
 }
-
 </style>
