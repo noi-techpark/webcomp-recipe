@@ -65,7 +65,7 @@ export default Vue.extend({
     },
     language: {
       type: String,
-      default: 'it',
+      default: 'de',
     },
     pageSize: {
       type: Number,
