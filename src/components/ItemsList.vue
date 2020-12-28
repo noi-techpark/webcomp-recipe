@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import {ActivityApi, ArticleApi, GastronomyApi, PoiApi} from "@/api";
+import {ArticleApi} from "@/api";
 import Paging from "@/components/Paging";
 
 export default {

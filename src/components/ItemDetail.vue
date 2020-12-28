@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import {GastronomyApi, PoiApi, ActivityApi, ArticleApi, ODHTagApi} from '@/api';
+import {ArticleApi, ODHTagApi} from '@/api';
 import ImageDetail from "@/components/ImageDetail";
 
 const GASTRONOMY_TYPES = [
