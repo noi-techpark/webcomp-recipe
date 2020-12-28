@@ -27,7 +27,25 @@
 import Vue from 'vue';
 import ItemsList from './components/ItemsList.vue';
 import ItemDetail from './components/ItemDetail.vue';
+import VueI18n from 'vue-i18n';
+
+import messagesEn from '@/assets/locales/en.json';
+import messagesDe from '@/assets/locales/de.json';
+import messagesIt from '@/assets/locales/it.json';
+
+Vue.use(VueI18n);
+
+const i18n = new VueI18n({
+  locale: 'de',
+  messages: {
+    en: messagesEn,
+    de: messagesDe,
+    it: messagesIt,
+  },
+});
+
 export default Vue.extend({
+  i18n,
   components: {
     ItemsList,
     ItemDetail,
