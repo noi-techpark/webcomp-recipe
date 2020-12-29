@@ -298,6 +298,7 @@ export default {
   flex-grow: 1;
   margin: 16px;
   box-shadow: 0px 3px 6px #00000029;
+  cursor: pointer;
 }
 
 hr.solid {
@@ -353,6 +354,7 @@ hr.solid {
   display: flex;
   flex-direction: column;
   width: 100%;
+  cursor: pointer;
 }
 
 .bottom-divider {
@@ -472,6 +474,7 @@ hr.solid {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .grid-switch-button {
@@ -483,6 +486,7 @@ hr.solid {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 ::placeholder {
@@ -509,5 +513,6 @@ input:focus {
 
 .search-button {
   padding-right: 20px;
+  cursor: pointer;
 }
 </style>
