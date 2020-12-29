@@ -204,7 +204,6 @@ export default {
       this.timer = setTimeout(this.loadRecipeList, 300, this.currentPage);
     },
     loadRecipeList(pageNum) {
-      console.log('load recipe list');
       this.isLoading = true;
       const articleApi = new ArticleApi();
       articleApi
@@ -228,7 +227,6 @@ export default {
         )
         .then((value) => {
           this.items = value?.data?.Items ?? [];
-          console.log(this.items);
           if (this.items != null) {
             this.items = this.items.filter(
               (item) =>

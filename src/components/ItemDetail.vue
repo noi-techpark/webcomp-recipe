@@ -203,7 +203,6 @@ export default {
         .oDHTagGetODHTags(language, null, null, [])
         .then((value) => {
           this.odhTags = value.data;
-          console.log(value);
         });
     },
     loadRecipeItem() {
@@ -211,7 +210,6 @@ export default {
         .articleGetActivitySingle(this.contentId)
         .then((value) => {
           this.item = value.data;
-          console.log(this.item);
         });
     },
     close() {
