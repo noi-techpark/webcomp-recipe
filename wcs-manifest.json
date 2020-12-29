@@ -1,16 +1,17 @@
 {
-  "title": "Tourism Detail",
+  "title": "Recipe Detail",
   "description": "",
   "descriptionAbstract": "",
   "license": "AGPL-3.0",
-  "repositoryUrl": "https://github.com/noi-techpark/webcomp-tourism-detail",
-  "authors": [
+  "copyrightHolders": [
     {
       "name": "NOI",
       "email": "info@noi.bz.it",
-      "organization": "NOI S.p.A",
+      "organization": "NOI AG/SpA Südtirol - Alto Adige",
       "organizationUrl": "https://noi.bz.it"
-    },
+    }
+  ],
+  "authors": [
     {
       "name": "KONVERTO",
       "email": "info@konverto.eu",
@@ -18,16 +19,64 @@
       "organizationUrl": "https://konverto.eu"
     }
   ],
-  "image": null,
-  "searchTags": [],
+  "image": "",
+  "searchTags": [
+    "recipes"
+  ],
   "dist": {
     "basePath": "dist",
     "files": [
-      "webcomp-tourism-detail.min.js"
+      "webcomp-recipe.min.js"
     ]
   },
   "configuration": {
-    "tagName": "webcomp-tourism-detail",
-    "options": []
+    "tagName": "webcomp-recipe",
+    "options": [
+      {
+        "key": "contentIdList",
+        "type": "text",
+        "label": "List of content ids",
+        "required": false,
+        "options": {
+          "default": ""
+        }
+      },
+      {
+        "key": "language",
+        "type": "select",
+        "label": "language",
+        "required": false,
+        "options": {
+          "values": [
+            "en",
+            "de",
+            "it"
+          ],
+          "default": "de"
+        }
+      },
+      {
+        "key": "pageSize",
+        "type": "number",
+        "label": "Number of list items per page",
+        "required": false,
+        "options": {
+          "default": 20
+        }
+      },
+      {
+        "key": "defaultPresentation",
+        "type": "select",
+        "label": "Default type of list presentation",
+        "required": false,
+        "options": {
+          "default": "list",
+          "values": [
+            "list",
+            "grid"
+          ]
+        }
+      }
+    ]
   }
 }
