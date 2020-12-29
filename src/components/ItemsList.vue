@@ -373,6 +373,7 @@ hr.solid {
   display: flex;
   flex-direction: column;
   width: 100%;
+
 }
 
 @media (min-width: 768px) {
@@ -421,7 +422,7 @@ hr.solid {
   padding: 16px;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex-grow: 1;
 }
 
 .recipe-divider {
