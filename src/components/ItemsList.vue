@@ -160,7 +160,7 @@ export default {
       isLoading: false,
       showList: this.defaultPresentation === 'list',
       searchInput: '',
-      timer: null
+      timer: null,
     };
   },
   watch: {
