@@ -19,6 +19,7 @@
         class="search-input"
         :placeholder="$t('searchRecipe')"
         v-model="searchInput"
+        @keyup="searchRecipeList"
       />
       <img
         src="@/assets/img/ic_search.svg"
@@ -159,6 +160,7 @@ export default {
       isLoading: false,
       showList: this.defaultPresentation === 'list',
       searchInput: '',
+      timer: null
     };
   },
   watch: {
@@ -196,6 +198,10 @@ export default {
     },
     showDetail(contentId) {
       this.$emit('show-detail', contentId);
+    },
+    searchRecipeList() {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(this.loadRecipeList, 300, this.currentPage);
     },
     loadRecipeList(pageNum) {
       console.log('load recipe list');
