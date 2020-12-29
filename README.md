@@ -30,7 +30,7 @@ List of content Ids separated by a comma. Example: "1,2,3"
 Type: String\
 Default: null
 
-#### langugage
+#### language
 
 Language of the data 
 
@@ -45,7 +45,7 @@ Number of items that are shown in one page
 Type: Number\
 Default: 20
 
-### defaultPresentation
+#### defaultPresentation
 
 Default presentation of recipe list
 
