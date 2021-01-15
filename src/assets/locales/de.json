@@ -1,0 +1,49 @@
+{
+    "altitude": "Höhe",
+    "difficulty": "Schwierigkeit",
+    "location": "Ort",
+    "phone": "Telefon",
+    "web": "Web",
+    "categories": "Kategorien",
+    "lastChange": "Letzte Aktualisierung",
+    "scheduleTypes": {
+        "1": "Geöffnet",
+        "2": "Geschlossen"
+    },
+    "timeCodes": {
+        "1": "Allgemeine Öffnungszeiten",
+        "2": "Warme Mahlzeiten",
+        "3": "Pizza",
+        "4": "Snacks"
+    },
+    "scheduleDays": {
+        "Monday": "Mo",
+        "Tuesday": "Di",
+        "Wednesday": "Mi",
+        "Thuresday": "Do",
+        "Friday": "Fr",
+        "Saturday": "Sa",
+        "Sunday": "So"
+    },
+    "mainType": "Hauptkategorie",
+    "subType": "Unterkategorie",
+    "altitudeDifference": "Höhenunterschied",
+    "altitudeHighestPoint": "Höchster Punkt",
+    "altitudeLowestPoint": "Niedrigster Punkt",
+    "Gastronomy": "Gastronomie",
+    "Activity": "Aktivitäten",
+    "props": {
+    },
+    "yes": "Ja",
+    "paging": {
+        "next": "weiter",
+        "back": "zurück"
+    },
+    "noResults": "Keine Ergebnisse gefunden",
+    "recipes": "Rezepte",
+    "preparationTime": "Zubereitungszeit",
+    "persons": "Personen",
+    "back": "Zurück",
+    "searchRecipe": "Rezept suchen",
+    "ingredients": "Zutaten"
+}

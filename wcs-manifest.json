@@ -1,27 +1,82 @@
 {
-  "title": "Webcomponent Boilerplate",
-  "description": "A webcomponent boilerplate that can be used to build your own boilerplate.",
-  "descriptionAbstract": "A webcomponent boilerplate",
+  "title": "Recipe Detail",
+  "description": "",
+  "descriptionAbstract": "",
   "license": "AGPL-3.0",
-  "repositoryUrl": "https://github.com/noi-techpark/webcomp-boilerplate",
-  "authors": [
+  "copyrightHolders": [
     {
       "name": "NOI",
       "email": "info@noi.bz.it",
-      "organization": "NOI S.p.A",
+      "organization": "NOI AG/SpA Südtirol - Alto Adige",
       "organizationUrl": "https://noi.bz.it"
     }
   ],
-  "image": null,
-  "searchTags": [],
+  "authors": [
+    {
+      "name": "KONVERTO",
+      "email": "info@konverto.eu",
+      "organization": "KONVERTO AG",
+      "organizationUrl": "https://konverto.eu"
+    }
+  ],
+  "image": "",
+  "searchTags": [
+    "recipes"
+  ],
   "dist": {
     "basePath": "dist",
     "files": [
-      "app.min.js"
+      "webcomp-recipe.min.js"
     ]
   },
   "configuration": {
-    "tagName": "webcomponent-boilerplate",
-    "options": []
+    "tagName": "webcomp-recipe",
+    "options": [
+      {
+        "key": "contentIdList",
+        "type": "text",
+        "label": "List of content ids",
+        "required": false,
+        "options": {
+          "default": ""
+        }
+      },
+      {
+        "key": "language",
+        "type": "select",
+        "label": "language",
+        "required": false,
+        "options": {
+          "values": [
+            "en",
+            "de",
+            "it"
+          ],
+          "default": "de"
+        }
+      },
+      {
+        "key": "pageSize",
+        "type": "number",
+        "label": "Number of list items per page",
+        "required": false,
+        "options": {
+          "default": 20
+        }
+      },
+      {
+        "key": "defaultPresentation",
+        "type": "select",
+        "label": "Default type of list presentation",
+        "required": false,
+        "options": {
+          "default": "list",
+          "values": [
+            "list",
+            "grid"
+          ]
+        }
+      }
+    ]
   }
 }

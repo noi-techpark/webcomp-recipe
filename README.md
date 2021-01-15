@@ -1,12 +1,4 @@
-Replace all `ToDo` notes in this file and adjust also the following files:
-- package.json:
-    - Adjust the general parts like name, description, ...
-    - Adjust the three scripts `npm run start`, `npm run build` and `npm run test`
-- wcs-manifest.json:
-    - Adjust the general parts like title, description, ...
-    - Adjust the configuration part with all possible configuration options (https://webcomponents.opendatahub.bz.it/getting-started)
-
-# ToDo: Project Name
+# Tourism Details Web Component
 
 ToDo: Description of the project.
 
@@ -21,26 +13,45 @@ ToDo: Description of the project.
 
 ## Usage
 
-ToDo: Include the webcompscript file `dist/webcomp-boilerplate.min.js` in your HTML and define the web component like this:
-
 ```html
-<webcomp-boilerplate xxx="test" yyy="2"></webcomp-boilerplate>
+<script src="https://unpkg.com/vue"></script>
+<script src="./webcomp-recipe.js"></script>
+
+
+<webcomp-recipe></webcomp-recipe>
 ```
 
 ### Attributes
 
-#### xxxx
+#### contentIdList
 
-The description of the parameter xxx.
+List of content Ids separated by a comma. Example: "1,2,3" 
 
-Type: string
-Options: "test", "123"
+Type: String\
+Default: null
 
-#### yyy
+#### language
 
-The description of the parameter yyy.
+Language of the data 
 
-Type: int
+Type: string\
+Options: ["de", "en", "it"]\
+Default: "de"
+
+#### pageSize
+
+Number of items that are shown in one page
+
+Type: Number\
+Default: 20
+
+#### defaultPresentation
+
+Default presentation of recipe list
+
+Type: string\
+Options: ["list", "grid"]\
+Default: "list"
 
 ## Getting started
 
@@ -56,18 +67,18 @@ To build the project, the following prerequisites must be met:
 
 For a ready to use Docker environment with all prerequisites already installed and prepared, you can check out the [Docker environment](#docker-environment) section.
 
-### Source code
+`### Source code`
 
 Get a copy of the repository:
 
 ```bash
-ToDo: git clone https://github.com/noi-techpark/project-name.git
+ToDo: git clone https://github.com/noi-techpark/webcomp-recipe.git
 ```
 
 Change directory:
 
 ```bash
-ToDo: cd project-name/
+ToDo: cd webcomp-recipe/
 ```
 
 ### Dependencies
@@ -155,7 +166,7 @@ docker-compose run --rm app /bin/bash -c "npm run test"
 
 ### Support
 
-ToDo: For support, please contact [info@opendatahub.bz.it](mailto:info@opendatahub.bz.it).
+For support, please contact [info@opendatahub.bz.it](mailto:info@opendatahub.bz.it).
 
 ### Contributing
 
