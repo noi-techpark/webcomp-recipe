@@ -116,6 +116,8 @@ To create the distributable files, execute the following command:
 npm run build
 ```
 
+After the build the web-component can be tested by opening /dist/demo.html
+
 ## Docker environment
 
 For the project a Docker environment is already prepared and ready to use with all necessary prerequisites.
