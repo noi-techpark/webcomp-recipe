@@ -14,7 +14,6 @@ ToDo: Description of the project.
 ## Usage
 
 ```html
-<script src="https://unpkg.com/vue"></script>
 <script src="./webcomp-recipe.js"></script>
 
 
