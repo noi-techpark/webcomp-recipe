@@ -237,7 +237,6 @@ export default {
           }
           this.$emit('change-current-page', value?.data?.CurrentPage);
           this.totalPages = value?.data?.TotalPages;
-          console.log(value);
           this.isLoading = false;
         });
     },

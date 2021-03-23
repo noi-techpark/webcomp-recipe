@@ -217,7 +217,6 @@ export default {
     },
     openImageDetail(image) {
       this.imageUrl = image.ImageUrl;
-      console.log(this.imageUrl);
       this.selectedImage = image;
       this.showImage = true;
     },
