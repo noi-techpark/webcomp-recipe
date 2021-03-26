@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="back-button" @click.prevent="close" v-if="isListAvailable">
-      <img src="@/assets/img/arrow_left.svg" />
+      <div
+        style="min-height: 40px; min-width: 40px; max-height: 40px; max-width: 40px"
+      >
+        <arrow-icon-left viewBox="0 0 24 24" width="100%" height="40px" />
+      </div>
       <span style="color: #888888">{{ $t('back') }}</span>
     </div>
     <div v-if="item" class="item">
@@ -9,13 +13,13 @@
 
       <div class="detail-box">
         <div class="recipe-info-group">
-          <img src="@/assets/img/ic_preparationtime.svg" />
+          <preparation-time-icon></preparation-time-icon>
           <span class="recipe-info-text"
             >{{ $t('preparationTime') }}: {{ preparationTime }}</span
           >
         </div>
         <div class="recipe-info-group">
-          <img src="@/assets/img/ic_persons.svg" />
+          <persons-icon></persons-icon>
           <span class="recipe-info-text"
             >{{ $t('persons') }}: {{ personCount }}
           </span>
@@ -87,9 +91,12 @@
 <script>
 import { ArticleApi, ODHTagApi } from '@/api';
 import ImageDetail from '@/components/ImageDetail';
+import PreparationTimeIcon from '@/assets/img/ic_preparationtime.svg';
+import PersonsIcon from '@/assets/img/ic_persons.svg';
+import ArrowIconLeft from '@/assets/img/arrow_left.svg';
 
 export default {
-  components: { ImageDetail },
+  components: { ImageDetail, PreparationTimeIcon, PersonsIcon, ArrowIconLeft },
   props: {
     contentId: {
       type: String,

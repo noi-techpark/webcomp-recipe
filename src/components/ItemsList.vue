@@ -4,12 +4,12 @@
       <h2 class="page-title">{{ $t('recipes') }}</h2>
       <div class="list-grid-switch">
         <div class="list-switch-button" @click="setShowList(true)">
-          <img v-if="showList" src="@/assets/img/list_blue.svg" />
-          <img v-else src="@/assets/img/list.svg" />
+          <ListBlueIcon v-if="showList"></ListBlueIcon>
+          <ListIcon v-else></ListIcon>
         </div>
         <div class="grid-switch-button" @click="setShowList(false)">
-          <img v-if="showList" src="@/assets/img/grid.svg" />
-          <img v-else src="@/assets/img/grid_blue.svg" />
+          <GridIcon v-if="showList" class="grid-icon"></GridIcon>
+          <GridBlueIcon v-else class="grid-icon-blue"></GridBlueIcon>
         </div>
       </div>
     </div>
@@ -21,11 +21,13 @@
         v-model="searchInput"
         @keyup="searchRecipeList"
       />
-      <img
-        src="@/assets/img/ic_search.svg"
-        class="search-button"
-        @click="loadRecipeList(currentPage)"
-      />
+      <div class="search-button">
+        <search-icon
+          @click="loadRecipeList(currentPage)"
+          width="24px"
+          height="24pxs"
+        ></search-icon>
+      </div>
     </div>
     <paging
       :current-page="currentPage"
@@ -46,7 +48,17 @@
           <div
             v-if="item.ImageGallery === null || item.ImageGallery.length === 0"
           >
-            <img class="thumbnail" :src="placeholderImage" />
+            <div
+              style="min-height: 70px; min-width: 70px; max-height: 70px; max-width: 70px"
+            >
+              <RezeptIcon
+                class="rezept-icon"
+                viewBox="0 0 595.3 367.54"
+                width="auto"
+                height="70px"
+                preserveAspectRatio="xMidYMid slice"
+              ></RezeptIcon>
+            </div>
           </div>
           <div v-else>
             <img class="thumbnail" :src="item.ImageGallery[0].ImageUrl" />
@@ -55,7 +67,11 @@
             <div class="title">{{ getTitle(item, language) }}</div>
             <div class="short-info">{{ getRecipeShortInfo(item) }}</div>
           </div>
-          <img src="@/assets/img/arrow_right.svg" width="28" height="28" />
+          <div
+            style="min-height: 40px; min-width: 40px; max-height: 40px; max-width: 40px"
+          >
+            <arrow-icon-right viewBox="0 0 24 24" width="100%" height="100%" />
+          </div>
         </div>
       </div>
     </template>
@@ -70,7 +86,15 @@
           <div
             v-if="item.ImageGallery === null || item.ImageGallery.length === 0"
           >
-            <img class="recipe-image" :src="placeholderImage" />
+            <div style="">
+              <RezeptIcon
+                class="rezept-icon"
+                viewBox="0 0 595.3 367.54"
+                width="auto"
+                height="200px"
+                preserveAspectRatio="xMidYMid slice"
+              ></RezeptIcon>
+            </div>
           </div>
           <div v-else>
             <img class="recipe-image" :src="item.ImageGallery[0].ImageUrl" />
@@ -81,13 +105,13 @@
             <hr class="recipe-divider" />
             <div class="recipe-info-groups">
               <div class="recipe-info-group">
-                <img src="@/assets/img/ic_preparationtime.svg" />
+                <PreparationTimeIcon></PreparationTimeIcon>
                 <span class="recipe-info-text">{{
                   getPreparationTime(item)
                 }}</span>
               </div>
               <div class="recipe-info-group">
-                <img src="@/assets/img/ic_persons.svg" />
+                <PersonsIcon></PersonsIcon>
                 <span class="recipe-info-text"
                   >{{ getPersonCount(item) }}
                 </span>
@@ -98,7 +122,7 @@
       </div>
     </template>
     <div v-else-if="isLoading" class="loading-spinner">
-      <img src="@/assets/img/loading.gif" />
+      <spinner></spinner>
     </div>
     <div class="noResult" v-else>{{ $t('noResults') }}</div>
     <div v-if="items.length === 1" class="item-container"></div>
@@ -124,9 +148,31 @@
 <script>
 import { ArticleApi } from '@/api';
 import Paging from '@/components/Paging';
+import ListBlueIcon from '@/assets/img/list_blue.svg';
+import ListIcon from '@/assets/img/list.svg';
+import GridBlueIcon from '@/assets/img/grid_blue.svg';
+import GridIcon from '@/assets/img/grid.svg';
+import SearchIcon from '@/assets/img/ic_search.svg';
+import ArrowIconRight from '@/assets/img/arrow_right.svg';
+import RezeptIcon from '@/assets/img/rezept.svg';
+import PreparationTimeIcon from '@/assets/img/ic_preparationtime.svg';
+import PersonsIcon from '@/assets/img/ic_persons.svg';
+import Spinner from '@/components/Spinner';
 
 export default {
-  components: { Paging },
+  components: {
+    Paging,
+    ListBlueIcon,
+    ListIcon,
+    GridBlueIcon,
+    GridIcon,
+    SearchIcon,
+    ArrowIconRight,
+    RezeptIcon,
+    PreparationTimeIcon,
+    PersonsIcon,
+    Spinner,
+  },
   props: {
     language: {
       type: String,
@@ -175,11 +221,7 @@ export default {
   created() {
     this.loadRecipeList(1);
   },
-  computed: {
-    placeholderImage() {
-      return require('../assets/img/rezept.svg');
-    },
-  },
+  computed: {},
   methods: {
     nextPage() {
       this.items = [];
@@ -237,7 +279,7 @@ export default {
           }
           this.$emit('change-current-page', value?.data?.CurrentPage);
           this.totalPages = value?.data?.TotalPages;
-          this.isLoading = false;
+          //this.isLoading = false;
         });
     },
     getTitle(item, language) {
@@ -265,7 +307,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 *,
 *:before,
 *:after {
@@ -372,7 +414,6 @@ hr.solid {
   display: flex;
   flex-direction: column;
   width: 100%;
-
 }
 
 @media (min-width: 768px) {
@@ -406,7 +447,7 @@ hr.solid {
 }
 
 .loading-spinner {
-  height: 50vh;
+  height: 70vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -506,6 +547,7 @@ input:focus {
   margin: 16px;
   display: flex;
   border: 1px solid #e8ecf1;
+  align-items: center;
 }
 
 .search-input {
@@ -516,7 +558,39 @@ input:focus {
 }
 
 .search-button {
+  padding-top: 4px;
   padding-right: 20px;
   cursor: pointer;
+  min-width: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  max-height: 24px;
+}
+
+.grid-icon {
+  path {
+    fill: #888;
+  }
+}
+
+.grid-icon-blue {
+  path {
+    fill: #2980b9;
+  }
+}
+
+.rezept-icon {
+  .a {
+    fill: none;
+  }
+  .b {
+    fill: #e8ecf1;
+  }
+  .c {
+    clip-path: url(#a);
+  }
+  .d {
+    fill: #fff;
+  }
 }
 </style>

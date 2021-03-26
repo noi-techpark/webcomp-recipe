@@ -7,18 +7,32 @@
       style="display: flex; align-items: center; justify-content: space-between;"
       :style="imageStyle"
     >
-      <div class="img-button" @click="lastImage" v-if="hasMultipleImgs">
-        <img src="@/assets/img/arrow_left.svg" width="50" height="50" />
+      <div
+        class="img-button"
+        @click="lastImage"
+        v-if="hasMultipleImgs"
+        style="min-height: 40px; min-width: 40px; max-height: 40px; max-width: 40px"
+      >
+        <arrow-icon-left viewBox="0 0 24 24" width="100%" height="100%" />
       </div>
-      <div class="img-button" @click="nextImage" v-if="hasMultipleImgs">
-        <img src="@/assets/img/arrow_right.svg" width="50" height="50" />
+      <div
+        class="img-button"
+        @click="nextImage"
+        v-if="hasMultipleImgs"
+        style="min-height: 40px; min-width: 40px; max-height: 40px; max-width: 40px"
+      >
+        <arrow-icon-right viewBox="0 0 24 24" width="100%" height="100%" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ArrowIconLeft from '@/assets/img/arrow_left.svg';
+import ArrowIconRight from '@/assets/img/arrow_right.svg';
+
 export default {
+  components: { ArrowIconLeft, ArrowIconRight },
   name: 'ImageDetail',
   props: {
     imgUrl: {
@@ -143,5 +157,6 @@ export default {
 
 .img-button:hover {
   background-color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
 }
 </style>
