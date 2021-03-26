@@ -219,7 +219,7 @@ export default {
     },
   },
   created() {
-    this.loadRecipeList(1);
+    this.loadRecipeList(this.currentPage);
   },
   computed: {},
   methods: {
