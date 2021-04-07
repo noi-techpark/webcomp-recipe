@@ -18,7 +18,6 @@ pipeline {
             steps {
                 sh '''
                     npm run lint
-                    echo "npm run test missing"
                 '''
             }
         }
