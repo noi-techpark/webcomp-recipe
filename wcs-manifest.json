@@ -27,6 +27,12 @@
     "basePath": "dist",
     "files": [
       "webcomp-recipe.min.js"
+    ],
+    "scripts": [
+      {
+        "file": "webcomp-recipe.min.js",
+        "parameter": ""
+      }
     ]
   },
   "configuration": {
