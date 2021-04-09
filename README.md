@@ -115,6 +115,8 @@ To create the distributable files, execute the following command:
 npm run build
 ```
 
+After the build the web-component can be tested by opening /dist/demo.html
+
 ## Docker environment
 
 For the project a Docker environment is already prepared and ready to use with all necessary prerequisites.
@@ -165,7 +167,7 @@ docker-compose run --rm app /bin/bash -c "npm run test"
 
 ### Support
 
-For support, please contact [info@opendatahub.bz.it](mailto:info@opendatahub.bz.it).
+For support, please contact [help@opendatahub.bz.it](mailto:help@opendatahub.bz.it).
 
 ### Contributing
 

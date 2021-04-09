@@ -2,7 +2,7 @@
   "title": "Recipe Detail",
   "description": "A webcomponent to list recipes and show all details of a recipe. It is possible to display the recipes as cards or as a list and it exists a recipe search functionality. In addition it can be displayed only selected items or the details page of a single one.",
   "descriptionAbstract": "List and details of recipes",
-  "license": "AGPL-3.0",
+  "license": "AGPL-3.0-or-later",
   "copyrightHolders": [
     {
       "name": "NOI",
@@ -19,7 +19,7 @@
       "organizationUrl": "https://konverto.eu"
     }
   ],
-  "image": "",
+  "image": "wcs-logo.png",
   "searchTags": [
     "recipes"
   ],
@@ -27,6 +27,12 @@
     "basePath": "dist",
     "files": [
       "webcomp-recipe.min.js"
+    ],
+    "scripts": [
+      {
+        "file": "webcomp-recipe.min.js",
+        "parameter": ""
+      }
     ]
   },
   "configuration": {
