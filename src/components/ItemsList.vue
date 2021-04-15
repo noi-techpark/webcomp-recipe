@@ -580,6 +580,7 @@ input:focus {
 }
 
 .rezept-icon {
+  width: 100%;
   .a {
     fill: none;
   }
