@@ -6,7 +6,7 @@
       >
         <arrow-icon-left viewBox="0 0 24 24" width="100%" height="40px" />
       </div>
-      <span style="color: #888888">{{ $t('back') }}</span>
+      <span >{{ $t('back') }}</span>
     </div>
     <div v-if="item" class="item">
       <h1>{{ itemDetail.Title }}</h1>
@@ -359,7 +359,7 @@ ul {
 }
 
 .text {
-  color: #949494;
+  color: #2E3131;
 }
 
 .text-dark {
@@ -459,7 +459,7 @@ h1 {
   text-align: center;
   align-items: center;
   display: flex;
-  color: #cfcfcf;
+  color: #212529;
 }
 
 .tags {
