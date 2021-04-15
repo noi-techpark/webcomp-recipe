@@ -1,9 +1,9 @@
 {
-  "name": "webcomp-tourism-detail",
+  "name": "odh-recipe",
   "private": true,
   "scripts": {
     "start": "vue-cli-service serve",
-    "build": "vue-cli-service build --target wc --inline-vue --name webcomp-recipe ./src/App.vue",
+    "build": "vue-cli-service build --target wc --inline-vue --name odh-recipe ./src/App.vue",
     "lint": "vue-cli-service lint",
     "test": "..."
   },

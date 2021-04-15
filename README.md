@@ -14,24 +14,24 @@ ToDo: Description of the project.
 ## Usage
 
 ```html
-<script src="./webcomp-recipe.js"></script>
+<script src="./odh-recipe.min.js"></script>
 
 
-<webcomp-recipe></webcomp-recipe>
+<odh-recipe></odh-recipe>
 ```
 
 ### Attributes
 
 #### contentIdList
 
-List of content Ids separated by a comma. Example: "1,2,3" 
+List of content Ids separated by a comma. Example: "1,2,3"
 
 Type: String\
 Default: null
 
 #### language
 
-Language of the data 
+Language of the data
 
 Type: string\
 Options: ["de", "en", "it"]\
