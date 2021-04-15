@@ -26,17 +26,17 @@
   "dist": {
     "basePath": "dist",
     "files": [
-      "webcomp-recipe.min.js"
+      "odh-recipe.min.js"
     ],
     "scripts": [
       {
-        "file": "webcomp-recipe.min.js",
+        "file": "odh-recipe.min.js",
         "parameter": ""
       }
     ]
   },
   "configuration": {
-    "tagName": "webcomp-recipe",
+    "tagName": "odh-recipe",
     "options": [
       {
         "key": "contentIdList",
