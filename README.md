@@ -7,14 +7,31 @@ to display the recipes as cards or as a list and it exists a recipe search
 functionality. In addition it can be displayed only selected items or the
 details page of a single one.
 
-## Table of contents
-
-- [Usage](#usage)
-- [Gettings started](#getting-started)
-- [Tests and linting](#tests-and-linting)
-- [Deployment](#deployment)
-- [Docker environment](#docker-environment)
-- [Information](#information)
+- [Tourism Details](#tourism-details)
+  - [Usage](#usage)
+    - [Attributes](#attributes)
+      - [contentIdList](#contentidlist)
+      - [language](#language)
+      - [pageSize](#pagesize)
+      - [defaultPresentation](#defaultpresentation)
+  - [Getting started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Source code](#source-code)
+    - [Dependencies](#dependencies)
+    - [Build](#build)
+  - [Tests and linting](#tests-and-linting)
+  - [Deployment](#deployment)
+  - [Docker environment](#docker-environment)
+    - [Installation](#installation)
+    - [Dependenices](#dependenices)
+    - [Start and stop the containers](#start-and-stop-the-containers)
+    - [Running commands inside the container](#running-commands-inside-the-container)
+  - [Information](#information)
+    - [Support](#support)
+    - [Contributing](#contributing)
+    - [Documentation](#documentation)
+    - [Boilerplate](#boilerplate)
+    - [License](#license)
 
 ## Usage
 
