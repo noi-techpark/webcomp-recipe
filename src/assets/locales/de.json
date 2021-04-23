@@ -39,7 +39,7 @@
         "next": "weiter",
         "back": "zurück"
     },
-    "noResults": "Keine Ergebnisse gefunden",
+    "noResults": "Es konnte nichts gefunden werden. Verfeinern Sie Ihre Suche",
     "recipes": "Rezepte",
     "preparationTime": "Zubereitungszeit",
     "persons": "Personen",

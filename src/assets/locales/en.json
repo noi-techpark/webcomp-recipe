@@ -39,7 +39,7 @@
     "next": "Next",
     "back": "Back"
   },
-  "noResults": "No results found",
+  "noResults": "Nothing could be found, refine your search",
   "recipes": "Recipes",
   "preparationTime": "Preparation time",
   "persons": "Persons",

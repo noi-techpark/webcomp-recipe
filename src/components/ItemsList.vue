@@ -268,6 +268,7 @@ export default {
           []
         )
         .then((value) => {
+          this.isLoading = false
           this.items = value?.data?.Items ?? [];
           if (this.items != null) {
             this.items = this.items.filter(
@@ -455,7 +456,11 @@ hr.solid {
 }
 
 .noResult {
-  margin-left: 40px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .grid-info-detail {
