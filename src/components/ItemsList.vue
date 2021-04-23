@@ -68,7 +68,7 @@
             <div class="short-info">{{ getRecipeShortInfo(item) }}</div>
           </div>
           <div
-            style="min-height: 40px; min-width: 40px; max-height: 40px; max-width: 40px"
+            class="arrow-icon"
           >
             <arrow-icon-right viewBox="0 0 24 24" width="100%" height="100%" />
           </div>
@@ -593,5 +593,9 @@ input:focus {
   .d {
     fill: #fff;
   }
+}
+
+.arrow-icon {
+  min-height: 40px; min-width: 40px; max-height: 40px; max-width: 40px; display: flex
 }
 </style>
