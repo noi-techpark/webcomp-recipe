@@ -45,5 +45,6 @@
   "persons": "Persone",
   "back": "Indietro",
   "searchRecipe": "Ricerche di ricette",
-  "ingredients": "Ingredienti"
+  "ingredients": "Ingredienti",
+  "noItemData": "Nessun dato disponibile per la lingua impostata"
 }

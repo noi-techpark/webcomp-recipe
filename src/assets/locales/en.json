@@ -45,5 +45,6 @@
   "persons": "Persons",
   "back": "Back",
   "searchRecipe": "Search recipe",
-  "ingredients": "Ingredients"
+  "ingredients": "Ingredients",
+  "noItemData": "No data available for the set language"
 }
