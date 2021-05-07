@@ -37,8 +37,6 @@ details page of a single one.
 
 ```html
 <script src="./odh-recipe.min.js"></script>
-
-
 <odh-recipe></odh-recipe>
 ```
 
@@ -54,13 +52,14 @@ Default: null
 This is the article ID inside the Open Data Hub Tourism API. You can use the
 following command to retrieve IDs:
 
-```
-curl -X GET "https://tourism.opendatahub.bz.it/api/ArticleReduced?language=it&articletype=rezeptartikel"
+```http
+GET https://tourism.opendatahub.bz.it/api/ArticleReduced
+    ?language=it
+    &articletype=rezeptartikel
 ```
 
-Make sure to put the correct language, because the IDs are only available in a
-certain language and therefore if the language tag and IDs do not match you will
-get an empty result.
+Make sure to put the correct language. The IDs are sometimes only available in a
+certain language, and therefore you might get an empty result.
 
 See https://tourism.opendatahub.bz.it/swagger/ui/index#/Article for details.
 
