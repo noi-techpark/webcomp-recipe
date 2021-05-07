@@ -1,4 +1,4 @@
-# Tourism Details
+# Recipes
 
 [![REUSE status](https://api.reuse.software/badge/github.com/noi-techpark/webcomp-recipe)](https://api.reuse.software/info/github.com/noi-techpark/webcomp-recipe)
 
@@ -7,13 +7,13 @@ to display the recipes as cards or as a list and it exists a recipe search
 functionality. In addition it can be displayed only selected items or the
 details page of a single one.
 
-- [Tourism Details](#tourism-details)
+- [Recipes](#recipes)
   - [Usage](#usage)
     - [Attributes](#attributes)
-      - [contentIdList](#contentidlist)
+      - [content-id-list](#content-id-list)
       - [language](#language)
-      - [pageSize](#pagesize)
-      - [defaultPresentation](#defaultpresentation)
+      - [page-size](#page-size)
+      - [default-presentation](#default-presentation)
   - [Getting started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Source code](#source-code)
@@ -50,6 +50,19 @@ List of content Ids separated by a comma. Example: "1,2,3"
 
 Type: String\
 Default: null
+
+This is the article ID inside the Open Data Hub Tourism API. You can use the
+following command to retrieve IDs:
+
+```
+curl -X GET "https://tourism.opendatahub.bz.it/api/ArticleReduced?language=it&articletype=rezeptartikel"
+```
+
+Make sure to put the correct language, because the IDs are only available in a
+certain language and therefore if the language tag and IDs do not match you will
+get an empty result.
+
+See https://tourism.opendatahub.bz.it/swagger/ui/index#/Article for details.
 
 #### language
 
@@ -128,9 +141,10 @@ The application will be served and can be accessed at
 The tests and the linting can be executed with the following commands:
 
 ```bash
-npm run test
 npm run lint
 ```
+
+!! There are currently no tests available.
 
 ## Deployment
 
