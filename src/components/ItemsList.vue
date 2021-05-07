@@ -68,7 +68,7 @@
             <div class="short-info">{{ getRecipeShortInfo(item) }}</div>
           </div>
           <div
-            style="min-height: 40px; min-width: 40px; max-height: 40px; max-width: 40px"
+            class="arrow-icon"
           >
             <arrow-icon-right viewBox="0 0 24 24" width="100%" height="100%" />
           </div>
@@ -268,6 +268,7 @@ export default {
           []
         )
         .then((value) => {
+          this.isLoading = false
           this.items = value?.data?.Items ?? [];
           if (this.items != null) {
             this.items = this.items.filter(
@@ -455,7 +456,11 @@ hr.solid {
 }
 
 .noResult {
-  margin-left: 40px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .grid-info-detail {
@@ -593,5 +598,9 @@ input:focus {
   .d {
     fill: #fff;
   }
+}
+
+.arrow-icon {
+  min-height: 40px; min-width: 40px; max-height: 40px; max-width: 40px; display: flex
 }
 </style>

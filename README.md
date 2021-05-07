@@ -44,7 +44,7 @@ details page of a single one.
 
 ### Attributes
 
-#### contentIdList
+#### content-id-list
 
 List of content Ids separated by a comma. Example: "1,2,3"
 
@@ -59,14 +59,14 @@ Type: string\
 Options: ["de", "en", "it"]\
 Default: "de"
 
-#### pageSize
+#### page-size
 
 Number of items that are shown in one page
 
 Type: Number\
 Default: 20
 
-#### defaultPresentation
+#### default-presentation
 
 Default presentation of recipe list
 

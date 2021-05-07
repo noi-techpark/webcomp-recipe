@@ -8,7 +8,8 @@
       </div>
       <span >{{ $t('back') }}</span>
     </div>
-    <div v-if="item" class="item">
+    <div v-if="isItemEmpty" class="item-empty">{{ $t('noItemData')}}</div>
+    <div v-else-if="item" class="item">
       <h1>{{ itemDetail.Title }}</h1>
 
       <div class="detail-box">
@@ -138,6 +139,9 @@ export default {
     itemDetail() {
       return this.item?.Detail?.[this.language] || {};
     },
+    isItemEmpty() {
+      return Object.keys(this.itemDetail).length === 0;
+    },
     articleText() {
       return (
         this.item?.AdditionalArticleInfos?.[this.language]?.Elements
@@ -214,7 +218,7 @@ export default {
     },
     loadRecipeItem() {
       new ArticleApi()
-        .articleGetActivitySingle(this.contentId)
+        .articleGetActivitySingle(this.contentId, null, this.language)
         .then((value) => {
           this.item = value.data;
         });
@@ -484,5 +488,13 @@ h1 {
 
 div ::v-deep ul {
   padding-inline-start: 20px;
+}
+
+.item-empty {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
 }
 </style>

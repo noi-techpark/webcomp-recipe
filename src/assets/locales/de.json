@@ -39,11 +39,12 @@
         "next": "weiter",
         "back": "zurück"
     },
-    "noResults": "Keine Ergebnisse gefunden",
+    "noResults": "Es konnte nichts gefunden werden. Verfeinern Sie Ihre Suche",
     "recipes": "Rezepte",
     "preparationTime": "Zubereitungszeit",
     "persons": "Personen",
     "back": "Zurück",
     "searchRecipe": "Rezept suchen",
-    "ingredients": "Zutaten"
+    "ingredients": "Zutaten",
+    "noItemData": "Keine Daten für die eingestellte Sprache vorhanden"
 }

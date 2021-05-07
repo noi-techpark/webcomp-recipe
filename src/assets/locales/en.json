@@ -39,11 +39,12 @@
     "next": "Next",
     "back": "Back"
   },
-  "noResults": "No results found",
+  "noResults": "Nothing could be found, refine your search",
   "recipes": "Recipes",
   "preparationTime": "Preparation time",
   "persons": "Persons",
   "back": "Back",
   "searchRecipe": "Search recipe",
-  "ingredients": "Ingredients"
+  "ingredients": "Ingredients",
+  "noItemData": "No data available for the set language"
 }

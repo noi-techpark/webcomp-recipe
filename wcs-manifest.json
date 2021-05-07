@@ -39,7 +39,7 @@
     "tagName": "odh-recipe",
     "options": [
       {
-        "key": "contentIdList",
+        "key": "content-id-list",
         "type": "text",
         "label": "List of content ids",
         "required": false,
@@ -62,7 +62,7 @@
         }
       },
       {
-        "key": "pageSize",
+        "key": "page-size",
         "type": "number",
         "label": "Number of list items per page",
         "required": false,
@@ -71,7 +71,7 @@
         }
       },
       {
-        "key": "defaultPresentation",
+        "key": "default-presentation",
         "type": "select",
         "label": "Default type of list presentation",
         "required": false,
