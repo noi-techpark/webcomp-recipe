@@ -57,7 +57,7 @@ export default Vue.extend({
     },
     contentIdList: {
       type: String,
-      default: null,
+      default: '',
     },
     category: {
       type: String,
@@ -84,7 +84,7 @@ export default Vue.extend({
   },
   computed: {
     contentIds() {
-      return this.contentIdList !== null ? this.contentIdList.split(',') : [];
+      return this.contentIdList !== null ? this.contentIdList.split(',').filter(e =>  e) : [];
     },
     islistAvailable() {
       return this.contentIds.length != 1;
