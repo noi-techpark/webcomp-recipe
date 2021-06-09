@@ -261,7 +261,7 @@ export default {
           null,
           true,
           null,
-          null,
+          '',
           this.language,
           null,
           this.searchInput,
