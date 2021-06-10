@@ -1,15 +1,37 @@
-# Tourism Details Web Component
+# Recipes
 
-ToDo: Description of the project.
+[![REUSE status](https://api.reuse.software/badge/github.com/noi-techpark/webcomp-recipe)](https://api.reuse.software/info/github.com/noi-techpark/webcomp-recipe)
 
-## Table of contents
+A webcomponent to list recipes and show all details of a recipe. It is possible
+to display the recipes as cards or as a list and it exists a recipe search
+functionality. In addition it can be displayed only selected items or the
+details page of a single one.
 
-- [Usage](#usage)
-- [Gettings started](#getting-started)
-- [Tests and linting](#tests-and-linting)
-- [Deployment](#deployment)
-- [Docker environment](#docker-environment)
-- [Information](#information)
+- [Recipes](#recipes)
+  - [Usage](#usage)
+    - [Attributes](#attributes)
+      - [content-id-list](#content-id-list)
+      - [language](#language)
+      - [page-size](#page-size)
+      - [default-presentation](#default-presentation)
+  - [Getting started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Source code](#source-code)
+    - [Dependencies](#dependencies)
+    - [Build](#build)
+  - [Tests and linting](#tests-and-linting)
+  - [Deployment](#deployment)
+  - [Docker environment](#docker-environment)
+    - [Installation](#installation)
+    - [Dependenices](#dependenices)
+    - [Start and stop the containers](#start-and-stop-the-containers)
+    - [Running commands inside the container](#running-commands-inside-the-container)
+  - [Information](#information)
+    - [Support](#support)
+    - [Contributing](#contributing)
+    - [Documentation](#documentation)
+    - [Boilerplate](#boilerplate)
+    - [License](#license)
 
 ## Usage
 
@@ -28,6 +50,20 @@ List of content Ids separated by a comma. Example: "1,2,3"
 
 Type: String\
 Default: null
+
+This is the article ID inside the Open Data Hub Tourism API. You can use the
+following command to retrieve IDs:
+
+```http
+GET https://tourism.opendatahub.bz.it/api/ArticleReduced
+    ?language=it
+    &articletype=rezeptartikel
+```
+
+Make sure to put the correct language. The IDs are sometimes only available in a
+certain language, and therefore you might get an empty result.
+
+See https://tourism.opendatahub.bz.it/swagger/ui/index#/Article for details.
 
 #### language
 
@@ -64,14 +100,16 @@ To build the project, the following prerequisites must be met:
 - ToDo: Check the prerequisites
 - Node 12 / NPM 6
 
-For a ready to use Docker environment with all prerequisites already installed and prepared, you can check out the [Docker environment](#docker-environment) section.
+For a ready to use Docker environment with all prerequisites already installed
+and prepared, you can check out the [Docker environment](#docker-environment)
+section.
 
-`### Source code`
+### Source code
 
 Get a copy of the repository:
 
 ```bash
-ToDo: git clone https://github.com/noi-techpark/webcomp-recipe.git
+git clone https://github.com/noi-techpark/webcomp-recipe.git
 ```
 
 Change directory:
@@ -96,16 +134,18 @@ Build and start the project:
 npm run start
 ```
 
-The application will be served and can be accessed at [http://localhost:8080](http://localhost:8080).
+The application will be served and can be accessed at
+[http://localhost:8080](http://localhost:8080).
 
 ## Tests and linting
 
 The tests and the linting can be executed with the following commands:
 
 ```bash
-npm run test
 npm run lint
 ```
+
+!! There are currently no tests available.
 
 ## Deployment
 
@@ -119,13 +159,16 @@ After the build the web-component can be tested by opening /dist/demo.html
 
 ## Docker environment
 
-For the project a Docker environment is already prepared and ready to use with all necessary prerequisites.
+For the project a Docker environment is already prepared and ready to use with
+all necessary prerequisites.
 
-These Docker containers are the same as used by the continuous integration servers.
+These Docker containers are the same as used by the continuous integration
+servers.
 
 ### Installation
 
-Install [Docker](https://docs.docker.com/install/) (with Docker Compose) locally on your machine.
+Install [Docker](https://docs.docker.com/install/) (with Docker Compose) locally
+on your machine.
 
 ### Dependenices
 
@@ -151,7 +194,9 @@ docker-compose stop
 
 ### Running commands inside the container
 
-When the containers are running, you can execute any command inside the environment. Just replace the dots `...` in the following example with the command you wish to execute:
+When the containers are running, you can execute any command inside the
+environment. Just replace the dots `...` in the following example with the
+command you wish to execute:
 
 ```bash
 docker-compose run --rm app /bin/bash -c "..."
@@ -181,16 +226,20 @@ If you'd like to contribute, please follow the following instructions:
 
 - Create a pull request against the `development` branch.
 
-A more detailed description can be found here: [https://github.com/noi-techpark/documentation/blob/master/contributors.md](https://github.com/noi-techpark/documentation/blob/master/contributors.md).
+A more detailed description can be found here:
+[https://github.com/noi-techpark/documentation/blob/master/contributors.md](https://github.com/noi-techpark/documentation/blob/master/contributors.md).
 
 ### Documentation
 
-More documentation can be found at [https://opendatahub.readthedocs.io/en/latest/index.html](https://opendatahub.readthedocs.io/en/latest/index.html).
+More documentation can be found at
+[https://opendatahub.readthedocs.io/en/latest/index.html](https://opendatahub.readthedocs.io/en/latest/index.html).
 
 ### Boilerplate
 
-The project uses this boilerplate: [https://github.com/noi-techpark/webcomp-boilerplate](https://github.com/noi-techpark/webcomp-boilerplate).
+The project uses this boilerplate:
+[https://github.com/noi-techpark/webcomp-boilerplate](https://github.com/noi-techpark/webcomp-boilerplate).
 
 ### License
 
-The code in this project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3 license. See the [LICENSE.md](LICENSE.md) file for more information.
+The code in this project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE
+Version 3 license. See the [LICENSE.md](LICENSE.md) file for more information.

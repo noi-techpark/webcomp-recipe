@@ -1,29 +1,37 @@
 pipeline {
-	agent {
-		dockerfile {
-			filename 'infrastructure/docker/node.dockerfile'
-			additionalBuildArgs '--build-arg JENKINS_USER_ID=$(id -u jenkins) --build-arg JENKINS_GROUP_ID=$(id -g jenkins)'
-		}
-	}
+	agent any
 	options {
 		ansiColor('xterm')
 	}
 	stages {
-		stage('Dependencies') {
-			steps {
-				sh 'npm ci'
+		stage('Agent: Node Docker') {
+			agent {
+				dockerfile {
+					filename 'infrastructure/docker/node.dockerfile'
+					additionalBuildArgs '--build-arg JENKINS_USER_ID=$(id -u jenkins) --build-arg JENKINS_GROUP_ID=$(id -g jenkins)'
+				}
+			}
+			stages {
+				stage('Dependencies') {
+					steps {
+						sh 'npm ci'
+					}
+				}
+				stage('Test') {
+					steps {
+						sh 'npm run lint'
+					}
+				}
+				stage('Build') {
+					steps {
+						sh 'npm run build'
+					}
+				}
 			}
 		}
-		stage('Test') {
+		stage('CC: REUSE') {
 			steps {
-				sh '''
-					npm run lint
-				'''
-			}
-		}
-		stage('Build') {
-			steps {
-				sh 'npm run build'
+				sh 'reuse lint'
 			}
 		}
 	}
