@@ -6,9 +6,11 @@
       >
         <arrow-icon-left viewBox="0 0 24 24" width="100%" height="40px" />
       </div>
-      <span >{{ $t('back') }}</span>
+      <span>{{ $t('back') }}</span>
     </div>
-    <div v-if="isItemEmpty && !isLoading" class="item-empty">{{ $t('noItemData')}}</div>
+    <div v-if="isItemEmpty && !isLoading" class="item-empty">
+      {{ $t('noItemData') }}
+    </div>
     <div v-else-if="item" class="item">
       <h1>{{ itemDetail.Title }}</h1>
 
@@ -123,7 +125,7 @@ export default {
       showImage: false,
       imageUrl: null,
       selectedImage: null,
-      isLoading: false
+      isLoading: false,
     };
   },
   computed: {
@@ -366,7 +368,7 @@ ul {
 }
 
 .text {
-  color: #2E3131;
+  color: #2e3131;
 }
 
 .text-dark {

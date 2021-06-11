@@ -84,7 +84,9 @@ export default Vue.extend({
   },
   computed: {
     contentIds() {
-      return this.contentIdList !== null ? this.contentIdList.split(',').filter(e =>  e) : [];
+      return this.contentIdList !== null
+        ? this.contentIdList.split(',').filter((e) => e)
+        : [];
     },
     islistAvailable() {
       return this.contentIds.length != 1;
