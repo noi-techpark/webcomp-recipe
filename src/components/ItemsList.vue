@@ -67,9 +67,7 @@
             <div class="title">{{ getTitle(item, language) }}</div>
             <div class="short-info">{{ getRecipeShortInfo(item) }}</div>
           </div>
-          <div
-            class="arrow-icon"
-          >
+          <div class="arrow-icon">
             <arrow-icon-right viewBox="0 0 24 24" width="100%" height="100%" />
           </div>
         </div>
@@ -261,14 +259,14 @@ export default {
           null,
           true,
           null,
-          null,
+          '',
           this.language,
           null,
           this.searchInput,
           []
         )
         .then((value) => {
-          this.isLoading = false
+          this.isLoading = false;
           this.items = value?.data?.Items ?? [];
           if (this.items != null) {
             this.items = this.items.filter(
@@ -601,6 +599,10 @@ input:focus {
 }
 
 .arrow-icon {
-  min-height: 40px; min-width: 40px; max-height: 40px; max-width: 40px; display: flex
+  min-height: 40px;
+  min-width: 40px;
+  max-height: 40px;
+  max-width: 40px;
+  display: flex;
 }
 </style>

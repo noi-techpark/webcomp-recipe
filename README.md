@@ -37,6 +37,8 @@ details page of a single one.
 
 ```html
 <script src="./odh-recipe.min.js"></script>
+
+
 <odh-recipe></odh-recipe>
 ```
 
