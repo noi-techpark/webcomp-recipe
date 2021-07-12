@@ -253,7 +253,7 @@ export default {
           32,
           null,
           this.contentIdList,
-          null,
+          this.language,
           null,
           null,
           null,
@@ -278,7 +278,6 @@ export default {
           }
           this.$emit('change-current-page', value?.data?.CurrentPage);
           this.totalPages = value?.data?.TotalPages;
-          //this.isLoading = false;
         });
     },
     getTitle(item, language) {
