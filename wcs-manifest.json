@@ -26,7 +26,11 @@
   "dist": {
     "basePath": "dist",
     "files": [
-      "odh-recipe.min.js"
+      "demo.html",
+      "odh-recipe.min.js",
+      "odh-recipe.js.map",
+      "odh-recipe.min.js.map",
+      "odh-recipe.js"
     ],
     "scripts": [
       {
