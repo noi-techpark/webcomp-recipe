@@ -79,6 +79,10 @@
       <small class="text">
         {{ $t('lastChange') }}: {{ item.LastChange | dateFormat }}
       </small>
+      <small class="text-id">
+        ID: {{ this.contentId }}
+      </small>
+
     </div>
     <image-detail
       :imgUrl="imageUrl"
@@ -373,6 +377,11 @@ ul {
 
 .text {
   color: #2e3131;
+}
+
+.text-id {
+  color: #939699;
+  float: right;
 }
 
 .text-dark {
