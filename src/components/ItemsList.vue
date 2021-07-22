@@ -241,7 +241,7 @@ export default {
     },
     searchRecipeList() {
       clearTimeout(this.timer);
-      this.timer = setTimeout(this.loadRecipeList, 300, this.currentPage);
+      this.timer = setTimeout(this.loadRecipeList, 300, 1);
     },
     loadRecipeList(pageNum) {
       this.isLoading = true;
