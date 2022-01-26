@@ -1,6 +1,7 @@
 # Recipes
 
 [![REUSE status](https://api.reuse.software/badge/github.com/noi-techpark/webcomp-recipe)](https://api.reuse.software/info/github.com/noi-techpark/webcomp-recipe)
+[![CI](https://github.com/noi-techpark/webcomp-recipe/actions/workflows/ci.yml/badge.svg)](https://github.com/noi-techpark/webcomp-recipe/actions/workflows/ci.yml)
 
 A webcomponent to list recipes and show all details of a recipe. It is possible
 to display the recipes as cards or as a list and it exists a recipe search
