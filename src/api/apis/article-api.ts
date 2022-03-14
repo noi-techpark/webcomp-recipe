@@ -16,10 +16,8 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { Article } from '../models';
-import { ArticleBaseInfosLocalized } from '../models';
-import { ArticleTypes } from '../models';
-import { ResultOfArticleBaseInfos } from '../models';
+import { Article, ArticleBaseInfosLocalized, ResultOfArticleBaseInfos, ArticleTypes } from '../models';
+
 /**
  * ArticleApi - axios parameter creator
  * @export
@@ -395,6 +393,9 @@ export const ArticleApiAxiosParamCreator = function (configuration?: Configurati
             if (searchfilter !== undefined) {
                 localVarQueryParameter['searchfilter'] = searchfilter;
             }
+
+            // add origin parameter for logging
+            localVarQueryParameter['origin'] = "webcomp-recipe";
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
