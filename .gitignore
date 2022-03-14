@@ -20,3 +20,4 @@ yarn-error.log*
 
 # Do not ignore dist folders, since we need them to release the web component on
 # the main store
+dist/
