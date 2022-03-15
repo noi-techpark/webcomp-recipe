@@ -1,12 +1,14 @@
 # Recipes
 
 [![REUSE status](https://api.reuse.software/badge/github.com/noi-techpark/webcomp-recipe)](https://api.reuse.software/info/github.com/noi-techpark/webcomp-recipe)
-[![CI](https://github.com/noi-techpark/webcomp-recipe/actions/workflows/ci.yml/badge.svg)](https://github.com/noi-techpark/webcomp-recipe/actions/workflows/ci.yml)
+[![CI/CD](https://github.com/noi-techpark/webcomp-recipe/actions/workflows/main.yml/badge.svg)](https://github.com/noi-techpark/webcomp-recipe/actions/workflows/main.yml)
 
 A webcomponent to list recipes and show all details of a recipe. It is possible
 to display the recipes as cards or as a list and it exists a recipe search
 functionality. In addition it can be displayed only selected items or the
 details page of a single one.
+
+Do you want to see it in action? Go to our [web component store](https://webcomponents.opendatahub.bz.it/webcomponent/32c2bef1-a691-4b93-bc41-56ecb88e39f0)!
 
 - [Recipes](#recipes)
   - [Usage](#usage)
@@ -217,18 +219,7 @@ For support, please contact [help@opendatahub.bz.it](mailto:help@opendatahub.bz.
 
 ### Contributing
 
-If you'd like to contribute, please follow the following instructions:
-
-- Fork the repository.
-
-- Checkout a topic branch from the `development` branch.
-
-- Make sure the tests are passing.
-
-- Create a pull request against the `development` branch.
-
-A more detailed description can be found here:
-[https://github.com/noi-techpark/documentation/blob/master/contributors.md](https://github.com/noi-techpark/documentation/blob/master/contributors.md).
+If you'd like to contribute, please follow the Contributor Guidelines that can be found at [https://github.com/noi-techpark/odh-docs/wiki/Contributor-Guidelines%3A-Getting-started](https://github.com/noi-techpark/odh-docs/wiki/Contributor-Guidelines%3A-Getting-started).
 
 ### Documentation
 
