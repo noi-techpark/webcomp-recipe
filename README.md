@@ -15,7 +15,7 @@ to display the recipes as cards or as a list and it exists a recipe search
 functionality. In addition it can be displayed only selected items or the
 details page of a single one.
 
-Do you want to see it in action? Go to our [web component store](https://webcomponents.opendatahub.bz.it/webcomponent/32c2bef1-a691-4b93-bc41-56ecb88e39f0)!
+Do you want to see it in action? Go to our [web component store](https://webcomponents.opendatahub.com/webcomponent/32c2bef1-a691-4b93-bc41-56ecb88e39f0)!
 
 - [Recipes](#recipes)
   - [Usage](#usage)
@@ -65,7 +65,7 @@ This is the article ID inside the Open Data Hub Tourism API. You can use the
 following command to retrieve IDs:
 
 ```http
-GET https://tourism.opendatahub.bz.it/api/ArticleReduced
+GET https://tourism.opendatahub.com/api/ArticleReduced
     ?language=it
     &articletype=rezeptartikel
 ```
@@ -73,7 +73,7 @@ GET https://tourism.opendatahub.bz.it/api/ArticleReduced
 Make sure to put the correct language. The IDs are sometimes only available in a
 certain language, and therefore you might get an empty result.
 
-See https://tourism.opendatahub.bz.it/swagger/ui/index#/Article for details.
+See https://tourism.opendatahub.com/swagger/ui/index#/Article for details.
 
 #### language
 
@@ -222,7 +222,7 @@ docker-compose run --rm app /bin/bash -c "npm run test"
 
 ### Support
 
-For support, please contact [help@opendatahub.bz.it](mailto:help@opendatahub.bz.it).
+For support, please contact [help@opendatahub.com](mailto:help@opendatahub.com).
 
 ### Contributing
 
