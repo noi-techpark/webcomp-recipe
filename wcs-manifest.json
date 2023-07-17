@@ -4,6 +4,7 @@
   "descriptionAbstract": "List and details of recipes",
   "license": "AGPL-3.0-or-later",
   "repositoryUrl": "https://github.com/noi-techpark/webcomp-recipe.git",
+  "shortName": "recipe-detail",
   "copyrightHolders": [
     {
       "name": "NOI",
