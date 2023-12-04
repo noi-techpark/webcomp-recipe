@@ -78,7 +78,7 @@
         "label": "Default type of list presentation",
         "required": false,
         "options": {
-          "default": "list",
+          "default": "grid",
           "values": [
             "list",
             "grid"
