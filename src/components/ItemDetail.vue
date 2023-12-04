@@ -37,7 +37,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
       <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
         <div class="text content-box">
-          <img v-if="titleImage" :src="titleImage" class="header-image" />
+          <img v-if="titleImage" :src="titleImage.ImageUrl" class="header-image" @click="openImageDetail(titleImage)" />
           <div v-html="articleText"></div>
         </div>
         <div class="ingredients-container">
@@ -70,17 +70,17 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <div class="divider"></div>
       </div>
 
-      <div v-if="imageGallery">
+      <!-- <div v-if="imageGallery">
         <img
           v-for="(image, i) of imageGallery"
           :key="i"
-          :src="image"
+          :src="image.ImageUrl"
           height="200"
           width="200"
           class="image"
           @click="openImageDetail(image)"
         />
-      </div>
+      </div> -->
 
       <small class="text">
         {{ $t('lastChange') }}: {{ item.LastChange | dateFormat }}
@@ -138,7 +138,8 @@ export default {
   computed: {
     titleImage() {
       const image = this.item?.ImageGallery[0];
-      return image?.ImageUrl || null;
+      //return image?.ImageUrl || null;
+      return image || null;
     },
     imageGallery() {
       return this.item?.ImageGallery || [];

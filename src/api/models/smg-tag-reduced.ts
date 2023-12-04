@@ -15,5 +15,22 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-export * from './apis/article-api';
-export * from './apis/odhtag-api';
+/**
+ * 
+ * @export
+ * @interface SmgTagReduced
+ */
+export interface SmgTagReduced {
+    /**
+     * 
+     * @type {string}
+     * @memberof SmgTagReduced
+     */
+    id?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof SmgTagReduced
+     */
+    name?: any;
+}

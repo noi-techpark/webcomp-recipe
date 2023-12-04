@@ -15,5 +15,22 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-export * from './apis/article-api';
-export * from './apis/odhtag-api';
+/**
+ * 
+ * @export
+ * @interface ODHTags
+ */
+export interface ODHTags {
+    /**
+     * 
+     * @type {string}
+     * @memberof ODHTags
+     */
+    id?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof ODHTags
+     */
+    self?: any;
+}
