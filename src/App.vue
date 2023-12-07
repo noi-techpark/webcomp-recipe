@@ -26,6 +26,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       :current-page="currentPage"
       :defaultPresentation="defaultPresentation"
     />
+    <div id="footer">
+        <a href="https://opendatahub.com" target="_blank"
+          ><span id="footer-text">powered by Open Data Hub</span>
+          <img
+            :src="require('@/assets/icons/NOI_OPENDATAHUB_NEW_WH-01.png')"
+            height="35px"
+        /></a>
+     </div>
   </div>
 </template>
 
@@ -130,5 +138,27 @@ export default Vue.extend({
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/**********************
+FOOTER
+**********************/
+
+#footer {
+  margin-top: 25px;
+}
+
+#footer > a {
+  display: flex;
+  color: darkgrey;
+  text-decoration: none;
+  z-index: 100001;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#footer-text {
+  color: darkgrey;
+  margin-right: 10px;
 }
 </style>
