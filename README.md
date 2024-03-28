@@ -13,7 +13,7 @@ SPDX-License-Identifier: CC0-1.0
 A webcomponent to list recipes and show all details of a recipe. It is possible
 to display the recipes as cards or as a list and it exists a recipe search
 functionality. In addition it can be displayed only selected items or the
-details page of a single one.
+details page of a single one. 
 
 Do you want to see it in action? Go to our [web component store](https://webcomponents.opendatahub.com/webcomponent/32c2bef1-a691-4b93-bc41-56ecb88e39f0)!
 
